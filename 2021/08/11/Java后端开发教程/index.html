@@ -1,0 +1,666 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="lwd">
+  <meta name="keywords" content="">
+  
+  <title>Java后端开发教程 - Lwd_curent</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/night-owl.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>LWD</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/2.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Java后端开发教程">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-08-11 08:30" pubdate>
+        2021年8月11日 早上
+      </time>
+    </span>
+  
+</div>
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      32
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Java后端开发教程</h1>
+            
+            <div class="markdown-body">
+              <h3 id="简介："><a href="#简介：" class="headerlink" title="简介："></a>简介：</h3><p>emmm一个非常不正经的教程，暂时只是记录开发的步骤，具体原理需要留到下次。</p>
+<h3 id="资源："><a href="#资源：" class="headerlink" title="资源："></a>资源：</h3><blockquote>
+<p><strong>前后端所有的资源</strong></p>
+<blockquote>
+<p>链接：<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1_NRE678mgRl7p6UNd_6Xvg">https://pan.baidu.com/s/1_NRE678mgRl7p6UNd_6Xvg</a><br>提取码：1g8k</p>
+</blockquote>
+<p><strong>后端：</strong></p>
+<blockquote>
+<p><strong>Maven开源项目框架</strong></p>
+<blockquote>
+<p>链接：<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1-8cRTpmVQHLirZwuNG9L6Q">https://pan.baidu.com/s/1-8cRTpmVQHLirZwuNG9L6Q</a><br>提取码：se9k</p>
+</blockquote>
+<p><strong>idea编译器及破解工具</strong></p>
+<blockquote>
+<p>注意：该破解工具只对我提供的idea版本有效</p>
+<p>链接：<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1HbdKnCkZgKYOlB5uZerFyA">https://pan.baidu.com/s/1HbdKnCkZgKYOlB5uZerFyA</a><br>提取码：6u5s</p>
+</blockquote>
+<p><strong>Navicat Premium 15</strong></p>
+<blockquote>
+<p>软件安装包及破解工具</p>
+<blockquote>
+<p>链接：<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1bwOGRVOyt8K5tlwyPZh1tA">https://pan.baidu.com/s/1bwOGRVOyt8K5tlwyPZh1tA</a><br>提取码：bsky</p>
+</blockquote>
+<p>对应的破解教程</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV17Q4y1T7YV">Navicat_Premium_v15 激活_哔哩哔哩_bilibili</a></p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>默认大家已配置好jdk8(jdk1.8)，并将其添加到了PATH中。</p>
+<ul>
+<li>在idea选择Settings</li>
+</ul>
+<img src="/2021/08/11/Java%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E6%95%99%E7%A8%8B/2.png" srcset="/img/loading.gif" lazyload style="zoom: 67%;">
+
+
+
+<ul>
+<li><p>按照截图所示内容，将刚在下载好的Maven项目框架的文件路径，配置到idea中</p>
+<img src="/2021/08/11/Java%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E6%95%99%E7%A8%8B/3.png" srcset="/img/loading.gif" lazyload style="zoom: 50%;"></li>
+<li><p>新建一个project</p>
+</li>
+</ul>
+<img src="/2021/08/11/Java%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E6%95%99%E7%A8%8B/1.png" srcset="/img/loading.gif" lazyload style="zoom: 67%;">
+
+
+
+<ul>
+<li>按照下图所示内容即可</li>
+</ul>
+<img src="/2021/08/11/Java%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E6%95%99%E7%A8%8B/4.png" srcset="/img/loading.gif" lazyload style="zoom: 67%;">
+
+<img src="/2021/08/11/Java%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E6%95%99%E7%A8%8B/5.png" srcset="/img/loading.gif" lazyload style="zoom: 67%;">
+
+<img src="/2021/08/11/Java%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E6%95%99%E7%A8%8B/6.png" srcset="/img/loading.gif" lazyload style="zoom: 67%;">
+
+<img src="/2021/08/11/Java%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E6%95%99%E7%A8%8B/7.png" srcset="/img/loading.gif" lazyload style="zoom: 67%;">
+
+<ul>
+<li>Finish之后，需要等待一段时间来完成下载配置</li>
+</ul>
+<img src="/2021/08/11/Java%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E6%95%99%E7%A8%8B/8.png" srcset="/img/loading.gif" lazyload style="zoom: 67%;">
+
+<p>完成上述操作之后，我们就创建好了一个基本的后台项目。</p>
+<hr>
+<h3 id="接下来完成数据库以及一个用户注册业务"><a href="#接下来完成数据库以及一个用户注册业务" class="headerlink" title="接下来完成数据库以及一个用户注册业务"></a>接下来完成数据库以及一个用户注册业务</h3><h4 id="数据库部分"><a href="#数据库部分" class="headerlink" title="数据库部分"></a>数据库部分</h4><p><strong>在Navicat中</strong>，新建一个MySQL连接</p>
+<img src="/2021/08/11/Java%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E6%95%99%E7%A8%8B/10.png" srcset="/img/loading.gif" lazyload style="zoom: 67%;">
+
+<p>在example连接中新建一个数据库demo</p>
+<img src="/2021/08/11/Java%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E6%95%99%E7%A8%8B/9.png" srcset="/img/loading.gif" lazyload style="zoom: 67%;">
+
+<p>在demo数据库中，新建一个user表</p>
+<img src="/2021/08/11/Java%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E6%95%99%E7%A8%8B/11.png" srcset="/img/loading.gif" lazyload style="zoom: 67%;">
+
+<hr>
+<h4 id="IDEA部分"><a href="#IDEA部分" class="headerlink" title="IDEA部分"></a>IDEA部分</h4><h5 id="初始配置"><a href="#初始配置" class="headerlink" title="初始配置"></a>初始配置</h5><img src="/2021/08/11/Java%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E6%95%99%E7%A8%8B/12.png" srcset="/img/loading.gif" lazyload style="zoom: 67%;">
+
+
+
+<p>并按照下面的截图新建好package和directory以及yml</p>
+<img src="/2021/08/11/Java%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E6%95%99%E7%A8%8B/13.png" srcset="/img/loading.gif" lazyload style="zoom: 67%;">
+
+<hr>
+<h6 id="pojo包下的User类"><a href="#pojo包下的User类" class="headerlink" title="pojo包下的User类"></a>pojo包下的User类</h6><p>在pojo包中新建一个User类，并完成一些所需的数据库映射对象所需的代码配置</p>
+<img src="/2021/08/11/Java%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E6%95%99%E7%A8%8B/14.png" srcset="/img/loading.gif" lazyload style="zoom: 67%;">
+
+
+
+<p>接着空一行，按下ALT+INS，选择Constructor</p>
+<img src="/2021/08/11/Java%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E6%95%99%E7%A8%8B/15.png" srcset="/img/loading.gif" lazyload style="zoom: 67%;">
+
+
+
+<p>之间选择Select None 构造一个无参的方法</p>
+<img src="/2021/08/11/Java%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E6%95%99%E7%A8%8B/16.png" srcset="/img/loading.gif" lazyload style="zoom: 67%;">
+
+
+
+<p>考虑到用户注册时需要email，password和nickname</p>
+<p>我们按照同样的方法，构建一个只含email，password和nickname的方法</p>
+<img src="/2021/08/11/Java%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E6%95%99%E7%A8%8B/17.png" srcset="/img/loading.gif" lazyload style="zoom: 67%;">
+
+
+
+<p>同样的，用户登录时需要email和password，那么我们构建一个只含email和password的方法</p>
+<p>最后，我们还需要构建一个含全参的方法</p>
+<img src="/2021/08/11/Java%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E6%95%99%E7%A8%8B/18.png" srcset="/img/loading.gif" lazyload style="zoom: 67%;">
+
+
+
+<p>仍然是快捷建ALT+INS，这次我们选择Getter and Setter</p>
+<img src="/2021/08/11/Java%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E6%95%99%E7%A8%8B/19.png" srcset="/img/loading.gif" lazyload style="zoom: 67%;">
+
+<p>全选</p>
+<img src="/2021/08/11/Java%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E6%95%99%E7%A8%8B/20.png" srcset="/img/loading.gif" lazyload style="zoom: 67%;">
+
+
+
+<p>最后我们同样快捷建ALT+INS，选择toString(),</p>
+<p>全选并点击ok即可完成pojo中User类的一个简单的配置</p>
+<img src="/2021/08/11/Java%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E6%95%99%E7%A8%8B/21.png" srcset="/img/loading.gif" lazyload style="zoom: 67%;">
+
+<p>pojo下User类的全部代码如下</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.example.demo.pojo;<br><br><span class="hljs-keyword">import</span> org.apache.ibatis.type.Alias;<br><br><span class="hljs-meta">@Alias(&quot;user&quot;)</span><br><span class="hljs-comment">//起别名，在写sql代码时，如果传入的参数(parameterType)为User类，</span><br><span class="hljs-comment">//就不用写com.example.demo.pojo.User</span><br><span class="hljs-comment">//只需要写user就行</span><br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">User</span> </span>&#123;<br><br>    <span class="hljs-keyword">private</span> Integer id; <span class="hljs-comment">//用户编号</span><br>    <span class="hljs-keyword">private</span> String email; <span class="hljs-comment">//用户邮箱</span><br>    <span class="hljs-keyword">private</span> String password; <span class="hljs-comment">//用户密码</span><br>    <span class="hljs-keyword">private</span> String nickname; <span class="hljs-comment">//用户昵称</span><br><br>    <span class="hljs-comment">//无参</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">User</span><span class="hljs-params">()</span> </span>&#123;<br>    &#125;<br><br>    <span class="hljs-comment">//用户注册--需要邮箱，密码，昵称</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">User</span><span class="hljs-params">(String email, String password, String nickname)</span> </span>&#123;<br>        <span class="hljs-keyword">this</span>.email = email;<br>        <span class="hljs-keyword">this</span>.password = password;<br>        <span class="hljs-keyword">this</span>.nickname = nickname;<br>    &#125;<br><br>    <span class="hljs-comment">//用户登录--需要邮箱，密码</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">User</span><span class="hljs-params">(String email, String password)</span> </span>&#123;<br>        <span class="hljs-keyword">this</span>.email = email;<br>        <span class="hljs-keyword">this</span>.password = password;<br>    &#125;<br><br>    <span class="hljs-comment">//全参</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">User</span><span class="hljs-params">(Integer id, String email, String password, String nickname)</span> </span>&#123;<br>        <span class="hljs-keyword">this</span>.id = id;<br>        <span class="hljs-keyword">this</span>.email = email;<br>        <span class="hljs-keyword">this</span>.password = password;<br>        <span class="hljs-keyword">this</span>.nickname = nickname;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> Integer <span class="hljs-title">getId</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> id;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setId</span><span class="hljs-params">(Integer id)</span> </span>&#123;<br>        <span class="hljs-keyword">this</span>.id = id;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getEmail</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> email;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setEmail</span><span class="hljs-params">(String email)</span> </span>&#123;<br>        <span class="hljs-keyword">this</span>.email = email;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getPassword</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> password;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setPassword</span><span class="hljs-params">(String password)</span> </span>&#123;<br>        <span class="hljs-keyword">this</span>.password = password;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getNickname</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> nickname;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setNickname</span><span class="hljs-params">(String nickname)</span> </span>&#123;<br>        <span class="hljs-keyword">this</span>.nickname = nickname;<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">toString</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;User&#123;&quot;</span> +<br>                <span class="hljs-string">&quot;id=&quot;</span> + id +<br>                <span class="hljs-string">&quot;, email=&#x27;&quot;</span> + email + <span class="hljs-string">&#x27;\&#x27;&#x27;</span> +<br>                <span class="hljs-string">&quot;, password=&#x27;&quot;</span> + password + <span class="hljs-string">&#x27;\&#x27;&#x27;</span> +<br>                <span class="hljs-string">&quot;, nickname=&#x27;&quot;</span> + nickname + <span class="hljs-string">&#x27;\&#x27;&#x27;</span> +<br>                <span class="hljs-string">&#x27;&#125;&#x27;</span>;<br>    &#125;<br>&#125;<br><br></code></pre></div></td></tr></table></figure>
+
+<hr>
+<h6 id="application-yml"><a href="#application-yml" class="headerlink" title="application.yml"></a>application.yml</h6><p>进行数据库与idea的连接，以及配置mybatis(<em>MyBatis</em> 是一款优秀的持久层框架,它支持自定义 SQL、存储过程以及高级映射。)</p>
+<img src="/2021/08/11/Java%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E6%95%99%E7%A8%8B/22.png" srcset="/img/loading.gif" lazyload style="zoom: 67%;">
+
+<p>application.yml代码如下</p>
+<figure class="highlight xml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xml"># 配置java与数据库的连接<br>spring:<br>  datasource:<br>    username: root<br>    password: 123456<br>    url: jdbc:mysql://localhost:3306/demo # 这里我连的是数据库demo，只要将demo改为自己的数据库名字即可<br>    driver-class-name: com.mysql.cj.jdbc.Driver<br>server:<br>  port: 18081 # 端口号 ，可以自己设置一个，如果运行是发现端口号冲突，重新换一个就行<br><br># 配置sql代码<br>mybatis:<br>  type-aliases-package: com.example.demo.pojo # pojo的路径<br>  mapper-locations: classpath:mapper/*Mapper.xml # mapper文件地址<br>  configuration:<br>    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl # SQL语句输出日志<br><br></code></pre></div></td></tr></table></figure>
+
+<hr>
+<h6 id="config包下WebMvcConfig类"><a href="#config包下WebMvcConfig类" class="headerlink" title="config包下WebMvcConfig类"></a>config包下WebMvcConfig类</h6><p>在config包下新建一个WebMvcConfig类，并写入以下代码来设置跨域，以便前后端在url上的统一</p>
+<img src="/2021/08/11/Java%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E6%95%99%E7%A8%8B/23.png" srcset="/img/loading.gif" lazyload style="zoom: 67%;">
+
+
+
+<p>WebMvcConfig类代码</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.example.demo.config;<br><br><span class="hljs-keyword">import</span> org.springframework.context.annotation.Configuration;<br><span class="hljs-keyword">import</span> org.springframework.web.servlet.config.annotation.CorsRegistry;<br><span class="hljs-keyword">import</span> org.springframework.web.servlet.config.annotation.WebMvcConfigurer;<br><br><span class="hljs-meta">@Configuration</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">WebMvcConfig</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">WebMvcConfigurer</span> </span>&#123;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">addCorsMappings</span><span class="hljs-params">(CorsRegistry registry)</span> </span>&#123;<br>        <span class="hljs-comment">// 设置允许跨域的路径</span><br>        registry.addMapping(<span class="hljs-string">&quot;/**&quot;</span>)<br>                <span class="hljs-comment">// 允许跨域请求的域名</span><br>                .allowedOriginPatterns(<span class="hljs-string">&quot;*&quot;</span>)<br>                <span class="hljs-comment">//允许证书</span><br>                .allowCredentials(<span class="hljs-keyword">true</span>)<br>                <span class="hljs-comment">// 允许的方法</span><br>                .allowedMethods(<span class="hljs-string">&quot;*&quot;</span>)<br>                <span class="hljs-comment">// 跨域的时间</span><br>                .maxAge(<span class="hljs-number">3600</span>);<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<hr>
+<h6 id="util包下ResponseData类"><a href="#util包下ResponseData类" class="headerlink" title="util包下ResponseData类"></a>util包下ResponseData类</h6><p>在util包下新建一个ResponseData类，在后端连接前端时，发出一些成功或者错误的响应</p>
+<img src="/2021/08/11/Java%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E6%95%99%E7%A8%8B/24.png" srcset="/img/loading.gif" lazyload style="zoom: 67%;">
+
+<p>ResponseData类代码</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.example.demo.util;<br><span class="hljs-comment">//自定义响应数据</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ResponseData</span>&lt;<span class="hljs-title">T</span>&gt; </span>&#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">boolean</span> success; <span class="hljs-comment">//是否成功</span><br>    <span class="hljs-keyword">private</span> Integer code; <span class="hljs-comment">//响应代码</span><br>    <span class="hljs-keyword">private</span> String message; <span class="hljs-comment">//响应提示语句</span><br>    <span class="hljs-keyword">private</span> T data;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">ResponseData</span><span class="hljs-params">()</span></span>&#123;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">ResponseData</span><span class="hljs-params">(<span class="hljs-keyword">boolean</span> success, Integer code, String message)</span> </span>&#123;<br>        <span class="hljs-keyword">this</span>.success = success;<br>        <span class="hljs-keyword">this</span>.code = code;<br>        <span class="hljs-keyword">this</span>.message = message;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">ResponseData</span><span class="hljs-params">(<span class="hljs-keyword">boolean</span> success, Integer code, String message, T data)</span> </span>&#123;<br>        <span class="hljs-keyword">this</span>.success = success;<br>        <span class="hljs-keyword">this</span>.code = code;<br>        <span class="hljs-keyword">this</span>.message = message;<br>        <span class="hljs-keyword">this</span>.data = data;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">isSuccess</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> success;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setSuccess</span><span class="hljs-params">(<span class="hljs-keyword">boolean</span> success)</span> </span>&#123;<br>        <span class="hljs-keyword">this</span>.success = success;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> Integer <span class="hljs-title">getCode</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> code;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setCode</span><span class="hljs-params">(Integer code)</span> </span>&#123;<br>        <span class="hljs-keyword">this</span>.code = code;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getMessage</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> message;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setMessage</span><span class="hljs-params">(String message)</span> </span>&#123;<br>        <span class="hljs-keyword">this</span>.message = message;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> T <span class="hljs-title">getData</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> data;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setData</span><span class="hljs-params">(T data)</span> </span>&#123;<br>        <span class="hljs-keyword">this</span>.data = data;<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">toString</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;ResponseData&#123;&quot;</span> +<br>                <span class="hljs-string">&quot;success=&quot;</span> + success +<br>                <span class="hljs-string">&quot;, code=&quot;</span> + code +<br>                <span class="hljs-string">&quot;, message=&#x27;&quot;</span> + message + <span class="hljs-string">&#x27;\&#x27;&#x27;</span> +<br>                <span class="hljs-string">&quot;, data=&quot;</span> + data +<br>                <span class="hljs-string">&#x27;&#125;&#x27;</span>;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<hr>
+<h6 id="dao包下IUserDao接口"><a href="#dao包下IUserDao接口" class="headerlink" title="dao包下IUserDao接口"></a>dao包下IUserDao接口</h6><p>在dao包下新建一个IUserDao接口，该接口直接与SQL语句代码块相连，里面的代码用来调用不同的SQL语句</p>
+<img src="/2021/08/11/Java%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E6%95%99%E7%A8%8B/25.png" srcset="/img/loading.gif" lazyload style="zoom: 67%;">
+
+<p>IUserDao接口代码</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.example.demo.dao;<br><br><span class="hljs-keyword">import</span> com.example.demo.pojo.User;<br><span class="hljs-keyword">import</span> org.apache.ibatis.annotations.Mapper;<br><span class="hljs-keyword">import</span> org.springframework.stereotype.Repository;<br><br><span class="hljs-meta">@Mapper</span><br><span class="hljs-meta">@Repository</span><br><span class="hljs-comment">// 关于用户表的数据库接口</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">IUserDao</span> </span>&#123;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 新增一个用户</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> user 传入的是用户的邮箱，密码，昵称</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> 【0：注册失败 1：注册成功】</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">addOneUser</span><span class="hljs-params">(User user)</span></span>;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<hr>
+<h6 id="mapper文件夹下UserMapper-xml"><a href="#mapper文件夹下UserMapper-xml" class="headerlink" title="mapper文件夹下UserMapper.xml"></a>mapper文件夹下UserMapper.xml</h6><p>在mapper文件夹下，新建一个UserMapper.xml用来写SQL语句</p>
+<img src="/2021/08/11/Java%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E6%95%99%E7%A8%8B/26.png" srcset="/img/loading.gif" lazyload style="zoom: 67%;">
+
+<img src="/2021/08/11/Java%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E6%95%99%E7%A8%8B/27.png" srcset="/img/loading.gif" lazyload style="zoom: 67%;">
+
+
+
+<p>UserMapper.xml代码如下</p>
+<figure class="highlight xml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xml"><span class="hljs-meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-meta-keyword">mapper</span> <span class="hljs-meta-keyword">PUBLIC</span> <span class="hljs-meta-string">&quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;</span></span><br><span class="hljs-meta">        <span class="hljs-meta-string">&quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">mapper</span> <span class="hljs-attr">namespace</span>=<span class="hljs-string">&quot;com.example.demo.dao.IUserDao&quot;</span>&gt;</span><br><br>    <span class="hljs-comment">&lt;!--新增一个用户--&gt;</span><br>    <span class="hljs-comment">&lt;!--这里id=&quot;addOneUser&quot;对应着IUserDao接口中的方法addOneUser--&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">insert</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;addOneUser&quot;</span> <span class="hljs-attr">parameterType</span>=<span class="hljs-string">&quot;user&quot;</span>&gt;</span><br>        INSERT INTO `user`(`email`,`password`,`nickname`)<br>        VALUES (#&#123;email&#125;,#&#123;password&#125;,#&#123;nickname&#125;)<br>    <span class="hljs-tag">&lt;/<span class="hljs-name">insert</span>&gt;</span><br><br><span class="hljs-tag">&lt;/<span class="hljs-name">mapper</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+
+<hr>
+<h6 id="service包下IUserService接口"><a href="#service包下IUserService接口" class="headerlink" title="service包下IUserService接口"></a>service包下IUserService接口</h6><p>在service包中新建一个IUserService接口</p>
+<img src="/2021/08/11/Java%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E6%95%99%E7%A8%8B/28.png" srcset="/img/loading.gif" lazyload style="zoom: 67%;">
+
+
+
+<p>IUserService接口代码</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.example.demo.service;<br><br><span class="hljs-keyword">import</span> com.example.demo.pojo.User;<br><br><span class="hljs-comment">// 关于用户的业务接口</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">IUserService</span> </span>&#123;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 用户的注册业务</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> user 注册的信息【email,password,nickname】</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> 是否注册成功</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">userRegister</span><span class="hljs-params">(User user)</span> <span class="hljs-keyword">throws</span> Exception</span>;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<hr>
+<h6 id="service包下impl文件夹下UserServiceImpl类"><a href="#service包下impl文件夹下UserServiceImpl类" class="headerlink" title="service包下impl文件夹下UserServiceImpl类"></a>service包下impl文件夹下UserServiceImpl类</h6><p>在service包中新建一个impl文件夹，再在该文件夹下创建一个UserServiceImpl类</p>
+<img src="/2021/08/11/Java%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E6%95%99%E7%A8%8B/29.png" srcset="/img/loading.gif" lazyload style="zoom: 67%;">
+
+<p>UserServiceImpl类代码</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.example.demo.service.impl;<br><br><span class="hljs-keyword">import</span> com.example.demo.dao.IUserDao;<br><span class="hljs-keyword">import</span> com.example.demo.pojo.User;<br><span class="hljs-keyword">import</span> com.example.demo.service.IUserService;<br><span class="hljs-keyword">import</span> com.sun.org.apache.xml.internal.resolver.readers.ExtendedXMLCatalogReader;<br><span class="hljs-keyword">import</span> org.springframework.beans.factory.annotation.Autowired;<br><span class="hljs-keyword">import</span> org.springframework.stereotype.Service;<br><span class="hljs-keyword">import</span> org.springframework.transaction.annotation.Transactional;<br><br><span class="hljs-comment">// 关于用户的业务实现层</span><br><span class="hljs-meta">@Service</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UserServiceImpl</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">IUserService</span> </span>&#123;<br><br>    <span class="hljs-meta">@Autowired</span><br>    <span class="hljs-keyword">private</span> IUserDao userDao; <span class="hljs-comment">// 关于用户的数据库接口</span><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 用户的注册业务</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> user 注册的信息【email,password,nickname】</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> 是否注册成功</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-meta">@Transactional(rollbackFor = &#123;Exception.class&#125;)</span> <span class="hljs-comment">//事务回滚</span><br>    <span class="hljs-comment">//传入的user参数是由controller层传过来的，</span><br>    <span class="hljs-comment">// 而controller层中的user又是由前端的form表单通过ajax使用url传过来的</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">userRegister</span><span class="hljs-params">(User user)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br><br>        <span class="hljs-keyword">int</span> count = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">try</span> &#123;<br>            <span class="hljs-comment">// 新增一个用户</span><br>            count = userDao.addOneUser(user);<br>        &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>            e.printStackTrace();<br>            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Exception(<span class="hljs-string">&quot;该账户已被使用&quot;</span>);<br>        &#125;<br>        <span class="hljs-keyword">if</span>(count != <span class="hljs-number">1</span>)&#123;<br>            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Exception(<span class="hljs-string">&quot;新增失败&quot;</span>);<br>        &#125;<br><br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<hr>
+<h6 id="controller包下UserControll类"><a href="#controller包下UserControll类" class="headerlink" title="controller包下UserControll类"></a>controller包下UserControll类</h6><p>在控制层controller包下创建一个UserControll类，该类直接与前端相连</p>
+<img src="/2021/08/11/Java%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E6%95%99%E7%A8%8B/30.png" srcset="/img/loading.gif" lazyload style="zoom: 67%;">
+
+
+
+<p>UserControll类代码</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.example.demo.controller;<br><br><span class="hljs-keyword">import</span> com.example.demo.pojo.User;<br><span class="hljs-keyword">import</span> com.example.demo.service.IUserService;<br><span class="hljs-keyword">import</span> com.example.demo.util.ResponseData;<br><span class="hljs-keyword">import</span> org.springframework.beans.factory.annotation.Autowired;<br><span class="hljs-keyword">import</span> org.springframework.util.DigestUtils;<br><span class="hljs-keyword">import</span> org.springframework.web.bind.annotation.*;<br><br><span class="hljs-comment">// 关于用户的控制层【处理web请求】</span><br><span class="hljs-meta">@CrossOrigin</span><br><span class="hljs-meta">@RequestMapping(&quot;/user&quot;)</span> <span class="hljs-comment">// 设置url中UserController用户控制层都是在/user下的</span><br><span class="hljs-meta">@RestController</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UserController</span> </span>&#123;<br><br>    <span class="hljs-meta">@Autowired</span><br>    <span class="hljs-keyword">private</span> IUserService userService; <span class="hljs-comment">// 关于用户的业务</span><br><br>    <span class="hljs-comment">// 前端传参数给后端，用PostMapping</span><br>    <span class="hljs-comment">// 若前端不传参数给后端，则用GetMapping</span><br>    <br>    <span class="hljs-meta">@PostMapping(&quot;/register&quot;)</span> <span class="hljs-comment">// /user/register</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> ResponseData <span class="hljs-title">register</span><span class="hljs-params">(User user)</span></span>&#123;<br>        <span class="hljs-comment">// 密码加密</span><br>        user.setPassword(DigestUtils.md5DigestAsHex(user.getPassword().getBytes()));<br>        <span class="hljs-keyword">try</span> &#123;<br>            userService.userRegister(user);<br>            <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> ResponseData(<span class="hljs-keyword">true</span>,<span class="hljs-number">2000</span>,<span class="hljs-string">&quot;注册成功&quot;</span>);<br>        &#125; <span class="hljs-keyword">catch</span> (Exception e)&#123;<br>            e.printStackTrace();<br>            <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> ResponseData(<span class="hljs-keyword">false</span>,<span class="hljs-number">1000</span>,e.getMessage());<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<hr>
+<h4 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h4><p>按照下图运行成功，并未暂停报错，则至少数据库是配置好了，真正测试前端操作究竟能不能通过ajax修改后端数据库，我们将留到下一篇“java的前后端连接”来测试</p>
+<img src="/2021/08/11/Java%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E6%95%99%E7%A8%8B/31.png" srcset="/img/loading.gif" lazyload style="zoom: 67%;">
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Java/">Java</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%90%8E%E7%AB%AF/">后端</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/10/11/%E5%AE%89%E8%A3%85pytorch-gpu%E7%89%88%E6%9C%AC/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">安装pytorch-gpu版本</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/08/07/Latex%E8%AE%BA%E6%96%87%E6%A0%B7%E5%BC%8F/">
+                        <span class="hidden-mobile">Latex论文样式</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+  <!-- 引用依赖 -->
+<link rel="stylesheet" 
+href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@1.2.0/dist/Meting.min.js"></script>
+
+<!-- 我使用的APlayer本体 -->
+<div class="aplayer" 
+data-id="6724136629" 
+data-server="netease" 
+data-type="playlist" 
+data-fixed="true" 
+data-autoplay="false" 
+data-order="random" 
+data-volume="0.55" 
+data-theme="#cc543a" 
+data-preload="auto" >
+</div>
+<!--如果将本体放在body里面导致页面加载出现问题，请尝试放到body体后面-->
+
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<!--浏览器搞笑标题-->
+<script type="text/javascript" src="\js\FunnyTitle.js"></script>
+
+<script src="/live2d/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2d/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"display":{"position":"right","width":300,"height":600,"hOffset":-60,"vOffset":-140},"mobile":{"show":true},"model":{"scale":1.2,"jsonPath":"/live2d/assets/Yuri.model.json"},"log":false});</script></body>
+</html>

@@ -1,0 +1,476 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="lwd">
+  <meta name="keywords" content="">
+  
+  <title>从零开始的线性回归模型 - Lwd_curent</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/night-owl.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>LWD</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/2.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="从零开始的线性回归模型">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-07-11 21:05" pubdate>
+        2021年7月11日 晚上
+      </time>
+    </span>
+  
+</div>
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.9k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      24
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">从零开始的线性回归模型</h1>
+            
+            <div class="markdown-body">
+              <h2 id="从零开始的线性回归模型"><a href="#从零开始的线性回归模型" class="headerlink" title="从零开始的线性回归模型"></a>从零开始的线性回归模型</h2><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> random<br><span class="hljs-keyword">import</span> torch<br><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt<br><span class="hljs-comment">## 线性回归方程</span><br><span class="hljs-comment"># y = Xw + b + c</span><br><span class="hljs-comment"># X为1000x2的矩阵</span><br><span class="hljs-comment"># w = [2.-3.4]T</span><br><span class="hljs-comment"># b = 4.2</span><br><span class="hljs-comment"># c是为捕获特征和标签时的潜在观测误差，这里我们认为标准假设成立，即c服从均值为0的正态分布</span><br><span class="hljs-comment"># 为简化问题，标准差设为0.01</span><br><span class="hljs-comment"># torch.normal(mean,std,size=)：返回一个从单独的正态分布中提取的随机数张量，这些正态分布的平均值和标准差是给定的。</span><br><span class="hljs-comment"># mean均值，std标准差，表现形式为张量，size是返回的张量的大小(如果张量是矩阵nxm的话，size=(n,m))</span><br><span class="hljs-comment"># torch.matmul()类似于torch.mm()矩阵-矩阵乘法</span><br><br><span class="hljs-comment">## 生成给定了真实权重w和真实偏移值b的函数y = Xw + b + c的数据集</span><br><span class="hljs-comment"># 说明该数据集是真实数据,是一个训练集train set</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">synthetic_data</span>(<span class="hljs-params">w,b,num_examples</span>):</span><br>    X = torch.normal(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, (num_examples, <span class="hljs-built_in">len</span>(w)))<br>    y = torch.matmul(X,w) + b<br>    c = torch.normal(<span class="hljs-number">0</span>, <span class="hljs-number">0.01</span>, y.shape)<br>    y += c<br>    <span class="hljs-keyword">return</span> X, y.reshape((-<span class="hljs-number">1</span>, <span class="hljs-number">1</span>))<br><br>true_w = torch.tensor([<span class="hljs-number">2</span>, -<span class="hljs-number">3.4</span>])<br>true_b = <span class="hljs-number">4.2</span><br>features, labels = synthetic_data(true_w, true_b, <span class="hljs-number">1000</span>)<br><span class="hljs-comment"># print(features.shape, labels.shape)</span><br><span class="hljs-comment"># torch.Size([1000, 2]) torch.Size([1000, 1])</span><br><span class="hljs-comment"># features有1000行，每行包含一个二维数据样本(说明有两个特征值)，labels有1000行，每行包含一维标签值(一个标量)</span><br><br><span class="hljs-comment">#用散点图来观察features的第二列(第二个特征)与labels的线性关系</span><br><span class="hljs-comment"># plt.scatter(features[:, 1], labels)</span><br><span class="hljs-comment"># plt.show()</span><br><br><span class="hljs-comment">## 小批量随机读取数据集</span><br><span class="hljs-comment"># 该函数能打乱数据集中的样本，并以小批量的方式获取数据</span><br><span class="hljs-comment"># data_iter函数，用来接收批量大小，特征矩阵，标签向量作为输入，生成大小为batch_size的小批量，每个小批量包含一组特征和标签</span><br><span class="hljs-comment"># 最终目的是为了:小批量随机梯度下降</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">data_iter</span>(<span class="hljs-params">batch_size,features,labels</span>):</span><br>    num_examples = <span class="hljs-built_in">len</span>(features) <span class="hljs-comment"># len(features) == 1000</span><br>    indices = <span class="hljs-built_in">list</span>(<span class="hljs-built_in">range</span>(num_examples)) <span class="hljs-comment"># indices是一个list,里面包含0-1000个数字</span><br>    random.shuffle(indices) <span class="hljs-comment"># 将indices内的数乱序存放</span><br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>, num_examples, batch_size):<br>        batch_indices = torch.tensor(indices[i:<span class="hljs-built_in">min</span>(i+batch_size,num_examples)])<br>        <span class="hljs-comment"># min()确保右边界 i+batch_size 不会超出num_examples</span><br>        <span class="hljs-comment"># i从0开始,每次循环 i += batch_size,直到 i 超出num_examples则结束循环</span><br>        <span class="hljs-comment"># 每次取出范围为 [i,min(i+batch_size, num_examples)]内的数,</span><br>        <span class="hljs-comment"># 并作为向量(一维张量torch.tensor)形式,赋给batch_indices</span><br>        <span class="hljs-keyword">yield</span> features[batch_indices], labels[batch_indices]<br><br><span class="hljs-comment"># batch_size = 10</span><br><span class="hljs-comment"># for X, y in data_iter(batch_size, features, labels):</span><br><span class="hljs-comment">#     print(X,&#x27;\n&#x27;,y)</span><br><span class="hljs-comment">#     break</span><br><br><br><span class="hljs-comment">#------------------------------------------------------------------------------------------------</span><br><span class="hljs-comment"># 上面的部分为(创造数据集)和(定义小批量读取数据集的方法)</span><br><span class="hljs-comment">#------------------------------------------------------------------------------------------------</span><br><span class="hljs-comment"># 接下来为正式的解决问题</span><br><span class="hljs-comment">#------------------------------------------------------------------------------------------------</span><br><br><span class="hljs-comment">## 定义线性回归模型，为了降低难度，这里将噪声c设置为0</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">linreg</span>(<span class="hljs-params">X,w,b</span>):</span><br>    <span class="hljs-keyword">return</span> torch.matmul(X,w) + b<br><br><span class="hljs-comment">## 初始化权重w和偏移值b</span><br><span class="hljs-comment"># requires_grad=True,通过自动求导来计算梯度</span><br>w = torch.normal(<span class="hljs-number">0</span>, <span class="hljs-number">0.01</span>, size=(<span class="hljs-number">2</span>,<span class="hljs-number">1</span>), requires_grad=<span class="hljs-literal">True</span>)<br><span class="hljs-comment"># 从均值0,标准差0.01的正态分布中采样随机数来初始权重</span><br>b = torch.zeros(<span class="hljs-number">1</span>, requires_grad=<span class="hljs-literal">True</span>) <span class="hljs-comment">#初始化为标量0</span><br><br><span class="hljs-comment">## 定义损失函数(使用常见的&quot;平方损失函数&quot;)</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">squared_loss</span>(<span class="hljs-params">y_hat,y</span>):</span> <span class="hljs-comment"># y_hat是带^号的y，(表示估计值)，而y是数据集中实际的值</span><br>    <span class="hljs-keyword">return</span> (y_hat - y.reshape(y_hat.shape))**<span class="hljs-number">2</span> / <span class="hljs-number">2</span><br><br><span class="hljs-comment">## 定义优化算法(小批量随机梯度下降算法) 在优化算法中使用data_iter()得到的小批量数据集</span><br><span class="hljs-comment"># 该函数接收模型参数集合params,学习速率lr,批量大小batch_size</span><br><span class="hljs-comment"># 小批量随机梯度下降-small batch random gradient descent(SGD)</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">sgd</span>(<span class="hljs-params">params,lr,batch_size</span>):</span><br>    <span class="hljs-keyword">with</span> torch.no_grad(): <span class="hljs-comment"># 表示张量的计算过程中无需计算梯度</span><br>        <span class="hljs-keyword">for</span> param <span class="hljs-keyword">in</span> params:<br>            param -= lr * param.grad / batch_size<br>            param.grad.zero_() <span class="hljs-comment">#pytorch会积累梯度,所以每轮循环结束时要清空梯度</span><br><br><span class="hljs-comment"># torch.no_grad</span><br><span class="hljs-comment"># 在该模块下，所有计算得出的tensor的requires_grad都自动设置为false</span><br><span class="hljs-comment"># 即使一个tensor(命名为x)的requires_grad=True，在with torch.no_grad计算下，由x得到的新tensor(命名为w)的</span><br><span class="hljs-comment"># requires_grad也为False，且grad_fn也为None，即不会对w求导</span><br><span class="hljs-comment"># x = torch.randn(10,5,requires_grad=True)</span><br><span class="hljs-comment"># y = torch.randn(10,5,requires_grad=True)</span><br><span class="hljs-comment"># z = torch.randn(10,5,requires_grad=True)</span><br><span class="hljs-comment"># with torch.no_grad():</span><br><span class="hljs-comment">#     w = x + y + z</span><br><span class="hljs-comment">#     print(w.requires_grad) # False</span><br><span class="hljs-comment">#     print(w.grad_fn) # None</span><br><span class="hljs-comment"># print(w.requires_grad) # False</span><br><span class="hljs-comment"># print(w.grad_fn) # None</span><br><br><span class="hljs-comment">## 整体流程</span><br><span class="hljs-comment"># 初始化参数</span><br><span class="hljs-comment"># 重复，直到完成</span><br><span class="hljs-comment"># 读取一小批量训练样本，通过模型来获取一组预测，</span><br><span class="hljs-comment"># 通过预测，计算完损失后，开始反向传播，存储每个参数的梯度，</span><br><span class="hljs-comment"># 最后调用优化算法sgd来更新模型的参数(w,b)</span><br><br><span class="hljs-comment">#------------------------------------------------------------------------------------------------</span><br><span class="hljs-comment"># 上面为设定正确的线性回归方程，并根据该方程生成训练集数据，</span><br><span class="hljs-comment"># 构建读取数据方式，构建线性回归模型，损失函数，小批量随机梯度下降优化算法，</span><br><span class="hljs-comment">#-------------------------------------------------------------------------------------------------</span><br><span class="hljs-comment"># 下面实际训练过程</span><br><span class="hljs-comment">#-------------------------------------------------------------------------------------------------</span><br><br>lr = <span class="hljs-number">0.03</span> <span class="hljs-comment"># 学习率</span><br>num_epochs = <span class="hljs-number">3</span> <span class="hljs-comment"># 迭代周期个数</span><br><span class="hljs-comment"># 在每个迭代周期中，我们用data_iter函数遍历整个数据集，并将训练数据集中的所有样本都使用一次(假设样本数能被批量大小整除)</span><br>net = linreg <span class="hljs-comment"># 线性回归模型，也可以说是net(网络)</span><br>loss = squared_loss <span class="hljs-comment"># 损失值</span><br>batch_size = <span class="hljs-number">10</span> <span class="hljs-comment">#设置每个小批量的大小为batch_size</span><br><br><span class="hljs-keyword">for</span> epoch <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(num_epochs):<br>    <span class="hljs-keyword">for</span> X, y <span class="hljs-keyword">in</span> data_iter(batch_size,features,labels):<br>        l = loss(net(X,w,b),y) <span class="hljs-comment"># 计算求出来的“小批量数据集”的(估计值y_hat)和(实际的y真实值)之间的损失</span><br>        <span class="hljs-comment"># l的形状为(batch_size,1),需要将l的所有元素加和，并一次计算关于[&#x27;w&#x27;,&#x27;b&#x27;]的梯度</span><br>        l.<span class="hljs-built_in">sum</span>().backward()<br>        sgd([w,b],lr,batch_size) <span class="hljs-comment"># 使用参数的梯度来更新梯度</span><br>        <span class="hljs-comment"># 第二个for循环用来得到小批量数据集X,y，并带入参数w,b，求出l损失值，</span><br>        <span class="hljs-comment"># 并通过l.sum.backward来求出参数w,b的梯度</span><br>        <span class="hljs-comment"># 将含梯度的参数w,b带入sgd()算法中，更新得到新的参数w,b</span><br>    <span class="hljs-keyword">with</span> torch.no_grad():<br>        train_l = loss(net(features,w,b),labels)<br>        <span class="hljs-comment"># train_l == 计算构造的线性回归模型的(估计值y_hat)与(实际的y真实值)之间的损失，与l不同</span><br>        <span class="hljs-comment"># l是(小批量数据集Xw+b+c)与(小批量y)的损失，</span><br>        <span class="hljs-comment"># train_l是(整体全部数据集featuresw+b)与(全部数据对应的labels）的</span><br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&#x27;epoch <span class="hljs-subst">&#123;epoch+<span class="hljs-number">1</span>&#125;</span>, loss <span class="hljs-subst">&#123;<span class="hljs-built_in">float</span>(train_l.mean()):f&#125;</span>&#x27;</span>)<br><br><span class="hljs-built_in">print</span>(<span class="hljs-string">f&#x27;w的估计误差：<span class="hljs-subst">&#123;true_w - w.reshape(true_w.shape)&#125;</span>&#x27;</span>)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">f&#x27;b的估计误差：<span class="hljs-subst">&#123;true_b - b&#125;</span>&#x27;</span>)<br><br><span class="hljs-comment">##过程</span><br><span class="hljs-comment"># 1.生成数据集(此步骤在真实情况中一般不需要考虑，数据集是从外部收集得到的)，需要自己构建一个真实的线性回归方程</span><br><span class="hljs-comment"># 生成的数据集由features(x)和labels(y)构成，features是1000x2的矩阵，而labels是1000x1的矩阵(向量)</span><br><span class="hljs-comment"># 2.读取数据(因为使用的优化算法为“小批量随机梯度下降算法(sgd)“，所以需要小批量随机读取数据)</span><br><span class="hljs-comment"># 3.构建线性回归模型y=Xw+b(这里为了简单，将噪声c设置为0)</span><br><span class="hljs-comment"># 4.构建计算平方损失的损失函数(该函数计算&quot;小批量&quot;的结果值l，通过自动求导，可以求出”小批量”的参数[w,b]的梯度</span><br><span class="hljs-comment"># 并将带梯度的参数[w,b]用于优化算法(sgd)中，与计算&quot;featurs&quot;的结果值train_l不同)</span><br><span class="hljs-comment"># 5.构建优化算法”小批量随机梯度下降算法“(sgd)，将带梯度的参数[w,b]，batch_size喂入sgd算法中，从而更新[w,b]参数值</span><br><span class="hljs-comment"># 6.共有三次迭代周期，每个周期内以batch_size使用训练数据集的所有样本(假设样本数能整除批量大小(batch_size))</span><br><span class="hljs-comment"># 每次迭代结束后，计算labels与features之间的损失值train_l,也就是最终的损失值</span><br><br></code></pre></div></td></tr></table></figure>
+
+
+
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">人工智能</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/torch/">torch</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/07/16/EasyX%E5%AE%9E%E4%BE%8B/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">EasyX实例</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/07/11/django%E5%92%8Cmysql/">
+                        <span class="hidden-mobile">django和mysql</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+  <!-- 引用依赖 -->
+<link rel="stylesheet" 
+href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@1.2.0/dist/Meting.min.js"></script>
+
+<!-- 我使用的APlayer本体 -->
+<div class="aplayer" 
+data-id="6724136629" 
+data-server="netease" 
+data-type="playlist" 
+data-fixed="true" 
+data-autoplay="false" 
+data-order="random" 
+data-volume="0.55" 
+data-theme="#cc543a" 
+data-preload="auto" >
+</div>
+<!--如果将本体放在body里面导致页面加载出现问题，请尝试放到body体后面-->
+
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<!--浏览器搞笑标题-->
+<script type="text/javascript" src="\js\FunnyTitle.js"></script>
+
+<script src="/live2d/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2d/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"display":{"position":"right","width":300,"height":600,"hOffset":-60,"vOffset":-140},"mobile":{"show":true},"model":{"scale":1.2,"jsonPath":"/live2d/assets/Yuri.model.json"},"log":false});</script></body>
+</html>

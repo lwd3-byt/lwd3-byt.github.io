@@ -1,0 +1,587 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="lwd">
+  <meta name="keywords" content="">
+  
+  <title>OCR-(DB+CRNN)-代码分析-实践环境配置及运行 - Lwd_curent</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/night-owl.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>LWD</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/2.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="OCR-(DB+CRNN)-代码分析-实践环境配置及运行">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-07-28 16:54" pubdate>
+        2021年7月28日 下午
+      </time>
+    </span>
+  
+</div>
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      5.7k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      76
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">OCR-(DB+CRNN)-代码分析-实践环境配置及运行</h1>
+            
+            <div class="markdown-body">
+              <h2 id="代码下载及环境配置"><a href="#代码下载及环境配置" class="headerlink" title="代码下载及环境配置"></a>代码下载及环境配置</h2><p>首先是代码下载，<a target="_blank" rel="noopener" href="https://github.com/WenmuZhou/DBNet.pytorch">DBNet代码</a></p>
+<p>使用 <code>git clone</code> 的方式下载上述代码即可。</p>
+<p>使用conda来install一些必要的库</p>
+<p>我对代码文件夹中的README.MD文件做了一个简化，只需要按照接下来的步骤按照虚拟环境即可，若中途出现超时报错，请多换几次源(对此深感无奈)。</p>
+<p>先执行一下命令，构建一个初步的虚拟环境</p>
+<figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-string">conda</span> <span class="hljs-string">create</span> <span class="hljs-string">-n</span> <span class="hljs-string">dbnet</span> <span class="hljs-string">python=3.6</span><br><span class="hljs-string">activate</span> <span class="hljs-string">dbnet</span><br><span class="hljs-string">conda</span> <span class="hljs-string">install</span> <span class="hljs-string">ipython</span> <span class="hljs-string">pip</span><br><span class="hljs-string">pip</span> <span class="hljs-string">anyconfig==0.9.10</span><br><span class="hljs-string">pip</span> <span class="hljs-string">future==0.18.2</span><br><span class="hljs-string">pip</span> <span class="hljs-string">imgaug==0.4.0</span><br><span class="hljs-string">pip</span> <span class="hljs-string">matplotlib==3.1.2</span><br><span class="hljs-string">pip</span> <span class="hljs-string">numpy==1.17.4</span><br><span class="hljs-string">pip</span> <span class="hljs-string">opencv-python==4.1.2.30</span><br><span class="hljs-string">pip</span> <span class="hljs-string">Polygon3==3.0.8</span><br><span class="hljs-string">pip</span> <span class="hljs-string">pyclipper==1.1.0.post3</span><br><span class="hljs-string">pip</span> <span class="hljs-string">PyYAML==5.2</span><br><span class="hljs-string">pip</span> <span class="hljs-string">scikit-image==0.16.2</span><br><span class="hljs-string">pip</span> <span class="hljs-string">tensorboard==2.1.0</span><br><span class="hljs-string">pip</span> <span class="hljs-string">tqdm==4.40.1</span><br><span class="hljs-string">pip</span> <span class="hljs-string">install</span> <span class="hljs-string">natsort</span><br><span class="hljs-string">pip</span> <span class="hljs-string">install</span> <span class="hljs-string">addict</span><br><span class="hljs-string">pip</span> <span class="hljs-string">install</span> <span class="hljs-string">cudatoolkit==10.2.89</span> <span class="hljs-comment">#这个需要根据自己的电脑配置来确定</span><br></code></pre></div></td></tr></table></figure>
+
+<p>接下来的几个库，需要我们下载<code>.whl</code>来辅助下载，否则会非常慢，甚至找不到下载资源。</p>
+<p>他们分别是这几个库</p>
+<figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-string">cudnn-7.6.5-cuda10.2_0</span> <span class="hljs-comment">#这个需要根据自己的电脑配置来确定</span><br><span class="hljs-string">Shapely-1.6.4.post2-cp36-cp36m-win_amd64</span><br><span class="hljs-string">torch-1.7.1-cp36-cp36m-win_amd64</span><br><span class="hljs-string">torchvision-0.8.2-cp36-cp36m-win_amd64</span><br></code></pre></div></td></tr></table></figure>
+
+<p>我在这里放一下百度网盘的连接</p>
+<p>链接：<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1r1mpHcDWKvNwUqR60h5-Vw">https://pan.baidu.com/s/1r1mpHcDWKvNwUqR60h5-Vw</a><br>提取码：8ypv</p>
+<h2 id="训练步骤"><a href="#训练步骤" class="headerlink" title="训练步骤"></a>训练步骤</h2><p>首先需要修改一些配置文件</p>
+<p>进入<code>git clone</code>好的代码文件中。</p>
+<p>首先看config文件夹下的一些配置文件：这些配置文件中的内容包括了backbone使用何种网络模型来进行特征提取，</p>
+<p>是否采用dcn空洞卷积来增大感受野，训练数据和测试数据的一个存放位置，是否启用预训练模式，epochs，各种参数等…</p>
+<p><img src="/2021/07/28/DBNet-%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90-%E5%AE%9E%E8%B7%B5%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%8F%8A%E8%BF%90%E8%A1%8C/2.png" srcset="/img/loading.gif" lazyload></p>
+<p>接着查看tools文件夹下的train.py</p>
+<p><img src="/2021/07/28/DBNet-%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90-%E5%AE%9E%E8%B7%B5%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%8F%8A%E8%BF%90%E8%A1%8C/1.png" srcset="/img/loading.gif" lazyload></p>
+<p>将原来的”config/…….”配置文件的<strong>相对路径</strong>改为具体采用的配置方案的配置文件的<strong>绝对路径</strong></p>
+<p>例如我采用的是<code>icdar2015_resnet18_FPN_DBhead_polyLR.yaml</code></p>
+<p>改好之后，按照图片中的格式，修改所选择的配置文件中一些关于数据的存放路径(注：train.txt和test.txt文件夹还未生成，先按代码文件夹下的README.MD，在datasets文件夹下，分别放好<strong>train,test文件夹下的gt和img</strong>)</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45779880/article/details/105642393">数据集下载链接</a></p>
+<p><img src="/2021/07/28/DBNet-%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90-%E5%AE%9E%E8%B7%B5%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%8F%8A%E8%BF%90%E8%A1%8C/3.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2021/07/28/DBNet-%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90-%E5%AE%9E%E8%B7%B5%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%8F%8A%E8%BF%90%E8%A1%8C/4.png" srcset="/img/loading.gif" lazyload></p>
+<p>接下来按照<code>load.py</code>代码，生成<code>train.txt</code>和<code>test.txt</code>两个文件<img src="/2021/07/28/DBNet-%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90-%E5%AE%9E%E8%B7%B5%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%8F%8A%E8%BF%90%E8%A1%8C/5.png" srcset="/img/loading.gif" lazyload></p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> os<br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_images</span>(<span class="hljs-params">img_path</span>):</span><br>    <span class="hljs-string">&#x27;&#x27;&#x27;</span><br><span class="hljs-string">    find image files in data path</span><br><span class="hljs-string">    :return: list of files found</span><br><span class="hljs-string">    &#x27;&#x27;&#x27;</span><br>    img_path = os.path.abspath(img_path)<br>    files = []<br>    exts = [<span class="hljs-string">&#x27;jpg&#x27;</span>, <span class="hljs-string">&#x27;png&#x27;</span>, <span class="hljs-string">&#x27;jpeg&#x27;</span>, <span class="hljs-string">&#x27;JPG&#x27;</span>, <span class="hljs-string">&#x27;PNG&#x27;</span>]<br>    <span class="hljs-keyword">for</span> parent, dirnames, filenames <span class="hljs-keyword">in</span> os.walk(img_path):<br>        <span class="hljs-keyword">for</span> filename <span class="hljs-keyword">in</span> filenames:<br>            <span class="hljs-keyword">for</span> ext <span class="hljs-keyword">in</span> exts:<br>                <span class="hljs-keyword">if</span> filename.endswith(ext):<br>                    files.append(os.path.join(parent, filename))<br>                    <span class="hljs-keyword">break</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;Find &#123;&#125; images&#x27;</span>.<span class="hljs-built_in">format</span>(<span class="hljs-built_in">len</span>(files)))<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">sorted</span>(files)<br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_txts</span>(<span class="hljs-params">txt_path</span>):</span><br>    <span class="hljs-string">&#x27;&#x27;&#x27;</span><br><span class="hljs-string">    find gt files in data path</span><br><span class="hljs-string">    :return: list of files found</span><br><span class="hljs-string">    &#x27;&#x27;&#x27;</span><br>    txt_path = os.path.abspath(txt_path)<br>    files = []<br>    exts = [<span class="hljs-string">&#x27;txt&#x27;</span>]<br>    <span class="hljs-keyword">for</span> parent, dirnames, filenames <span class="hljs-keyword">in</span> os.walk(txt_path):<br>        <span class="hljs-keyword">for</span> filename <span class="hljs-keyword">in</span> filenames:<br>            <span class="hljs-keyword">for</span> ext <span class="hljs-keyword">in</span> exts:<br>                <span class="hljs-keyword">if</span> filename.endswith(ext):<br>                    files.append(os.path.join(parent, filename))<br>                    <span class="hljs-keyword">break</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;Find &#123;&#125; txts&#x27;</span>.<span class="hljs-built_in">format</span>(<span class="hljs-built_in">len</span>(files)))<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">sorted</span>(files)<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    <span class="hljs-keyword">import</span> json<br>    <span class="hljs-comment">#img_path = &#x27;./data/ch4_training_images&#x27;</span><br>    <span class="hljs-comment">#img_path = &#x27;./train/img&#x27;</span><br>    img_path = <span class="hljs-string">&#x27;./test/img&#x27;</span><br>    files = get_images(img_path)<br>    <span class="hljs-comment">#txt_path = &#x27;./data/ch4_training_localization_transcription_gt&#x27;</span><br>    <span class="hljs-comment">#txt_path = &#x27;./train/gt&#x27;</span><br>    txt_path = <span class="hljs-string">&#x27;./test/gt&#x27;</span><br>    txts = get_txts(txt_path)<br>    n = <span class="hljs-built_in">len</span>(files)<br>    <span class="hljs-keyword">assert</span> <span class="hljs-built_in">len</span>(files) == <span class="hljs-built_in">len</span>(txts)<br>    <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;test.txt&#x27;</span>, <span class="hljs-string">&#x27;w&#x27;</span>) <span class="hljs-keyword">as</span> f:<br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n):<br>            line = files[i] + <span class="hljs-string">&#x27;\t&#x27;</span> + txts[i] + <span class="hljs-string">&#x27;\n&#x27;</span><br>            <span class="hljs-comment">#line = files[i] + &#x27; &#x27; + txts[i] + &#x27;\n&#x27;</span><br>            f.write(line)<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;dataset generated ^_^ &#x27;</span>)<br></code></pre></div></td></tr></table></figure>
+
+<p>运行tools文件夹下的train.py，即可开始训练</p>
+<p><img src="/2021/07/28/DBNet-%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90-%E5%AE%9E%E8%B7%B5%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%8F%8A%E8%BF%90%E8%A1%8C/6.png" srcset="/img/loading.gif" lazyload></p>
+<p>训练结果model_best.pth位置如下</p>
+<p><img src="/2021/07/28/DBNet-%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90-%E5%AE%9E%E8%B7%B5%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%8F%8A%E8%BF%90%E8%A1%8C/7.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="预测步骤"><a href="#预测步骤" class="headerlink" title="预测步骤"></a>预测步骤</h2><p>将红框中的路径，全部改为对应的<strong>model_best.pth</strong>，准备预测的图片，和预测结果的存放文件的绝对地址。</p>
+<p><img src="/2021/07/28/DBNet-%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90-%E5%AE%9E%E8%B7%B5%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%8F%8A%E8%BF%90%E8%A1%8C/8.png" srcset="/img/loading.gif" lazyload></p>
+<p>注意第二个红框，原代码中拼写有误。进行修改之后即可运行<code>predict.py</code>，然后即可在输出文件中查看训练结果。</p>
+<img src="/2021/07/28/DBNet-%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90-%E5%AE%9E%E8%B7%B5%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%8F%8A%E8%BF%90%E8%A1%8C/9.png" srcset="/img/loading.gif" lazyload style="zoom:50%;">
+
+<h2 id="整体网络模型构建代码"><a href="#整体网络模型构建代码" class="headerlink" title="整体网络模型构建代码"></a>整体网络模型构建代码</h2><p><code>models/model.py</code></p>
+<img src="/2021/07/28/DBNet-%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90-%E5%AE%9E%E8%B7%B5%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%8F%8A%E8%BF%90%E8%A1%8C/10.png" srcset="/img/loading.gif" lazyload style="zoom:80%;">
+
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Model</span>(<span class="hljs-params">nn.Module</span>):</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self, model_config: <span class="hljs-built_in">dict</span></span>):</span><br>        <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">        PANnet</span><br><span class="hljs-string">        :param model_config: 模型配置</span><br><span class="hljs-string">        &quot;&quot;&quot;</span><br>        <span class="hljs-built_in">super</span>().__init__()<br>        model_config = <span class="hljs-type">Dict</span>(model_config)<br>        backbone_type = model_config.backbone.pop(<span class="hljs-string">&#x27;type&#x27;</span>)<br>        neck_type = model_config.neck.pop(<span class="hljs-string">&#x27;type&#x27;</span>)<br>        head_type = model_config.head.pop(<span class="hljs-string">&#x27;type&#x27;</span>)    <span class="hljs-comment">#**将字典model_config中的backbone键的值全部解析出来</span><br>        <span class="hljs-comment"># backbone主干特征提取网络(和普通的resnet18网络模型一样，只是可以选择是否使用空洞卷积dcn来扩大感受野)</span><br>        <span class="hljs-comment"># 主干网络大多时候指的是提取特征的网络，其作用就是提取图片中的信息，供后面的网络使用</span><br>        self.backbone = build_backbone(backbone_type, **model_config.backbone)<br><br>        <span class="hljs-comment"># neck使用的是FPN特征金字塔(FPN是一种利用常规CNN模型来高效提取图片中各维度特征的方法。)</span><br>        <span class="hljs-comment"># 其中neck的in_channels是由backbone的out_channels传进来的</span><br>        <span class="hljs-comment"># neck是放在backbone和head之间的，是为了更好的利用backbone提取的特征</span><br>        self.neck = build_neck(neck_type, in_channels=self.backbone.out_channels, **model_config.neck)<br><br>        <span class="hljs-comment"># head是获取网络输出内容的网络，利用之前提取的特征，head利用这些特征，做出预测。</span><br>        self.head = build_head(head_type, in_channels=self.neck.out_channels, **model_config.head)<br><br>        <span class="hljs-comment"># 给参数配置文件取一个名</span><br>        self.name = <span class="hljs-string">f&#x27;<span class="hljs-subst">&#123;backbone_type&#125;</span>_<span class="hljs-subst">&#123;neck_type&#125;</span>_<span class="hljs-subst">&#123;head_type&#125;</span>&#x27;</span><br>        <br>    <span class="hljs-comment"># 前向传播</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">forward</span>(<span class="hljs-params">self, x</span>):</span><br>        _, _, H, W = x.size()<br>        backbone_out = self.backbone(x)<br>        neck_out = self.neck(backbone_out)<br>        y = self.head(neck_out)<br>        <span class="hljs-comment">#为了保险起见，再对y进行一次插值操作，使其尺寸与原图相同。</span><br>        y = F.interpolate(y, size=(H, W), mode=<span class="hljs-string">&#x27;bilinear&#x27;</span>, align_corners=<span class="hljs-literal">True</span>)<br>        <span class="hljs-keyword">return</span> y <span class="hljs-comment"># 整个模型最终得到的就是从head模型中输出的y</span><br>    <span class="hljs-comment"># 这个y最终会给到tools文件夹下的predict.py里的preds，</span><br>    <span class="hljs-comment"># 这个preds会喂给post_processing文件夹下的SegDetectorRepresenter()</span><br>    <span class="hljs-comment"># 并通过这个post_processing来获得后处理得到的文本框</span><br>    <span class="hljs-comment"># 如果是训练时，y会传给tools文件夹中的train.py文件</span><br></code></pre></div></td></tr></table></figure>
+
+<p><code>models/backbone/resnet.py</code>     <strong>Resnet18的网络模型构建         <img src="/2021/07/28/DBNet-%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90-%E5%AE%9E%E8%B7%B5%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%8F%8A%E8%BF%90%E8%A1%8C/11.png" srcset="/img/loading.gif" lazyload style="zoom: 80%;"></strong></p>
+<p>特征提取</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># resnet18和resnet34用的是BasicBlock，</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BasicBlock</span>(<span class="hljs-params">nn.Module</span>):</span><br>    expansion = <span class="hljs-number">1</span><br>    <span class="hljs-comment"># 卷积步长stride = 1，扩张大小dilation = 1(也就是padding)，</span><br>    <span class="hljs-comment"># in_planes和out_planes分别是输入和输出的通道数，</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self, inplanes, planes, stride=<span class="hljs-number">1</span>, downsample=<span class="hljs-literal">None</span>, dcn=<span class="hljs-literal">None</span></span>):</span><br>        <span class="hljs-built_in">super</span>(BasicBlock, self).__init__()<br>        self.with_dcn = dcn <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-literal">None</span> <span class="hljs-comment"># dcn参数指deformable convolution(空洞卷积)的参数设置</span><br>        self.conv1 = conv3x3(inplanes, planes, stride) <span class="hljs-comment"># 普通尺度不变的卷积核</span><br>        self.bn1 = BatchNorm2d(planes) <span class="hljs-comment">#BN</span><br>        self.relu = nn.ReLU(inplace=<span class="hljs-literal">True</span>) <span class="hljs-comment">#Relu</span><br>        self.with_modulated_dcn = <span class="hljs-literal">False</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> self.with_dcn: <span class="hljs-comment"># 不使用dcn空洞卷积</span><br>            self.conv2 = nn.Conv2d(planes, planes, kernel_size=<span class="hljs-number">3</span>, padding=<span class="hljs-number">1</span>, bias=<span class="hljs-literal">False</span>)<br>        <span class="hljs-keyword">else</span>: <span class="hljs-comment"># 使用dcn空洞卷积</span><br>            <span class="hljs-keyword">from</span> torchvision.ops <span class="hljs-keyword">import</span> DeformConv2d<br>            deformable_groups = dcn.get(<span class="hljs-string">&#x27;deformable_groups&#x27;</span>, <span class="hljs-number">1</span>)<br>            offset_channels = <span class="hljs-number">18</span><br>            self.conv2_offset = nn.Conv2d(planes, deformable_groups * offset_channels, kernel_size=<span class="hljs-number">3</span>, padding=<span class="hljs-number">1</span>)<br>            self.conv2 = DeformConv2d(planes, planes, kernel_size=<span class="hljs-number">3</span>, padding=<span class="hljs-number">1</span>, bias=<span class="hljs-literal">False</span>)<br>        self.bn2 = BatchNorm2d(planes)<br>        self.downsample = downsample<br>        self.stride = stride<br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">forward</span>(<span class="hljs-params">self, x</span>):</span><br>        residual = x<br><br>        out = self.conv1(x)<br>        out = self.bn1(out)<br>        out = self.relu(out)<br><br>        <span class="hljs-comment"># out = self.conv2(out)</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> self.with_dcn: <span class="hljs-comment">#如果不使用dcn空洞卷积</span><br>            out = self.conv2(out)<br>        <span class="hljs-keyword">else</span>:<br>            offset = self.conv2_offset(out)<br>            out = self.conv2(out, offset)<br>        out = self.bn2(out)<br>        <span class="hljs-comment"># 缩小图像（或称为下采样（subsampled）或降采样（downsampled））的主要目的是两个：</span><br>        <span class="hljs-comment"># 使得图像符合显示区域的大小；</span><br>        <span class="hljs-comment"># 生成对应图像的缩略图；</span><br>        <span class="hljs-comment"># 目的是为了让residual和out的尺度相同，只有相同才能进行out += residual操作</span><br>        <span class="hljs-keyword">if</span> self.downsample <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-literal">None</span>:<br>            residual = self.downsample(x)<br><br>        out += residual<br>        out = self.relu(out)<br><br>        <span class="hljs-keyword">return</span> out<br>  <span class="hljs-comment">#==================================================================================================  </span><br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">forward</span>(<span class="hljs-params">self, x</span>):</span><br>        x = self.conv1(x)<br>        x = self.bn1(x)<br>        x = self.relu(x)<br>        x = self.maxpool(x)<br><br>        x2 = self.layer1(x)<br>        x3 = self.layer2(x2)<br>        x4 = self.layer3(x3)<br>        x5 = self.layer4(x4)<br>        <span class="hljs-comment"># 这里的x2...5对应的就是原图尺寸1/2,1/4,1/8,1/16,1/32的特征向量</span><br>        <span class="hljs-comment"># 会作为backbone_out传入neck中，在FPN特征金字塔做upsample_add和upsample_cat</span><br>        <span class="hljs-keyword">return</span> x2, x3, x4, x5<br>    <br></code></pre></div></td></tr></table></figure>
+
+<p><code>models/neck/FPN.py</code>        <strong>FPN特征金字塔</strong>                      <img src="/2021/07/28/DBNet-%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90-%E5%AE%9E%E8%B7%B5%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%8F%8A%E8%BF%90%E8%A1%8C/12.png" srcset="/img/loading.gif" lazyload style="zoom: 80%;"></p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">forward</span>(<span class="hljs-params">self, x</span>):</span><br>    c2, c3, c4, c5 = x<br>    <span class="hljs-comment"># 此处的x含有backbon的各层信息</span><br>    <span class="hljs-comment"># 这里将x的1/32，1/16，1/8，1/4各层分别交给c5,c4,c3,c2</span><br>    <span class="hljs-comment"># 这里的1/32，1/16，1/8，1/4指的是原图尺寸的多少份之一</span><br>    <span class="hljs-comment"># Top-down</span><br>    <span class="hljs-comment"># 经过reduce_conv_c5(c5)，p5尺度不变，channels变为256</span><br>    p5 = self.reduce_conv_c5(c5)<br>    <span class="hljs-comment"># 经过_upsample_add(p5, self.reduce_conv_c4(c4))，</span><br>    <span class="hljs-comment"># p4是由“‘c5增加通道数为256之后得到的p5&#x27;和&#x27;增加通道数为256的c4’进行一个相加，并上采样得到的”</span><br>    p4 = self._upsample_add(p5, self.reduce_conv_c4(c4))<br>    p4 = self.smooth_p4(p4)<br>    p3 = self._upsample_add(p4, self.reduce_conv_c3(c3))<br>    p3 = self.smooth_p3(p3)<br>    p2 = self._upsample_add(p3, self.reduce_conv_c2(c2))<br>    p2 = self.smooth_p2(p2)<br>    <span class="hljs-comment"># 这里的p4,p3,p2是对应neck网络模型中的3个部分</span><br><br>    <span class="hljs-comment">#x此时获得了&#123;p2,p3,p4,p5先upsample到和p2一样原图1/2的尺寸，然后再进行conv-cat融合&#125;</span><br>    x = self._upsample_cat(p2, p3, p4, p5)<br>    <span class="hljs-comment"># 融合几个张量后再卷积</span><br>    x = self.conv(x)<br>    <span class="hljs-keyword">return</span> x<br><br><span class="hljs-comment">#上采样过程是用pytorch库中的import torch.nn.functional as F中的interpolate完成的，将上采样的结果再与相同尺寸的数据进行相加</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">_upsample_add</span>(<span class="hljs-params">self, x, y</span>):</span><br>    <span class="hljs-keyword">return</span> F.interpolate(x, size=y.size()[<span class="hljs-number">2</span>:]) + y<br>    <span class="hljs-comment">#将x的size插值为y的尺寸(使得尺寸相同)(upsample)，再与y相加(add)，合起来就是upsample_add</span><br><br><span class="hljs-comment">#通过上采样将p3,p4,p5的尺寸均插值为p2的1/4尺寸。将结果赋值给x，之后x再进行一个conv(x)</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">_upsample_cat</span>(<span class="hljs-params">self, p2, p3, p4, p5</span>):</span><br>    h, w = p2.size()[<span class="hljs-number">2</span>:]<br>    p3 = F.interpolate(p3, size=(h, w))<br>    p4 = F.interpolate(p4, size=(h, w))<br>    p5 = F.interpolate(p5, size=(h, w))<br>    <span class="hljs-comment"># 再进行p2,p3,p4,p5这几个张量tensor形式的图进行融合，</span><br>    <span class="hljs-comment"># 并且是按维数1拼接（横着拼）</span><br>    <span class="hljs-keyword">return</span> torch.cat([p2, p3, p4, p5], dim=<span class="hljs-number">1</span>)<br>    <span class="hljs-comment"># cat是concatnate的意思：拼接，联系在一起。</span><br>    <span class="hljs-comment"># 按维数1拼接（横着拼），将多个tensor向量进行拼接联系起来</span><br></code></pre></div></td></tr></table></figure>
+
+<p><code>models/head/DBHead.py</code>           <strong>DBNet核心模型</strong>       <img src="/2021/07/28/DBNet-%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90-%E5%AE%9E%E8%B7%B5%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%8F%8A%E8%BF%90%E8%A1%8C/13.png" srcset="/img/loading.gif" lazyload style="zoom: 80%;"></p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DBHead</span>(<span class="hljs-params">nn.Module</span>):</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self, in_channels, out_channels, k = <span class="hljs-number">50</span></span>):</span><br>        <span class="hljs-built_in">super</span>().__init__()<br>        self.k = k<br><br>        <span class="hljs-comment"># binarize把从backbone和neck进行特征融合后的原图尺寸1/4的结果进行卷积操作</span><br>        <span class="hljs-comment"># 之后得到的probability map(概率图)</span><br>        self.binarize = nn.Sequential(<br>            nn.Conv2d(in_channels, in_channels // <span class="hljs-number">4</span>, <span class="hljs-number">3</span>, padding=<span class="hljs-number">1</span>),<br>            nn.BatchNorm2d(in_channels // <span class="hljs-number">4</span>),<br>            nn.ReLU(inplace=<span class="hljs-literal">True</span>),<br>            nn.ConvTranspose2d(in_channels // <span class="hljs-number">4</span>, in_channels // <span class="hljs-number">4</span>, <span class="hljs-number">2</span>, <span class="hljs-number">2</span>),<br>            nn.BatchNorm2d(in_channels // <span class="hljs-number">4</span>),<br>            nn.ReLU(inplace=<span class="hljs-literal">True</span>),<br>            nn.ConvTranspose2d(in_channels // <span class="hljs-number">4</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">2</span>),<br>            nn.Sigmoid())<br>        self.binarize.apply(self.weights_init)<br><br>        <span class="hljs-comment"># thresh把从backbone和neck进行特征融合后的原图尺寸1/4的结果</span><br>        <span class="hljs-comment"># 用来计算threshold map</span><br>        self.thresh = self._init_thresh(in_channels)<br>        self.thresh.apply(self.weights_init)<br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">forward</span>(<span class="hljs-params">self, x</span>):</span> <span class="hljs-comment"># x是从neck中的到的1/4原图尺寸的一个张量结果，也就是neck_out</span><br>        <span class="hljs-comment"># shrink_maps也就是probability map</span><br>        <span class="hljs-comment"># 将从backbone和neck结合后得到的x再分别传入binarize函数，和thresh函数</span><br>        <span class="hljs-comment"># 得到probability map和threshold_maps</span><br>        shrink_maps = self.binarize(x) <span class="hljs-comment">#probability map其实就是shrink_map</span><br>        threshold_maps = self.thresh(x)<br>        <span class="hljs-comment"># 如果是在训练过程中使用模型，则self.training为True</span><br>        <span class="hljs-comment"># 则将进行一个可微分的二值化操作，通过probability map和threshold_maps，使用DB函数进行计算得到结果</span><br>        <span class="hljs-keyword">if</span> self.training:<br>            <span class="hljs-comment"># 则将进行一个可微分的二值化操作，通过probability map和threshold_maps，</span><br>            <span class="hljs-comment"># 使用step_function函数(DB函数进)行计算得到结果</span><br>            <span class="hljs-comment"># 将该结果赋值给binary_maps，并在融合时，除了shrink_maps,threshold_maps</span><br>            <span class="hljs-comment"># 还需要融合binary_maps</span><br>            binary_maps = self.step_function(shrink_maps, threshold_maps)<br>            <span class="hljs-comment"># 再进行两个张量tensor形式的图进行融合，并且是按维数1拼接（横着拼）</span><br>            y = torch.cat((shrink_maps, threshold_maps, binary_maps), dim=<span class="hljs-number">1</span>)<br>        <span class="hljs-keyword">else</span>: <span class="hljs-comment"># 预测过程</span><br>            <span class="hljs-comment"># 再进行两个张量tensor形式的图进行融合，并且是按维数1拼接（横着拼）</span><br>            y = torch.cat((shrink_maps, threshold_maps), dim=<span class="hljs-number">1</span>)<br>        <span class="hljs-keyword">return</span> y <span class="hljs-comment"># y是最终的一个预测结果</span><br></code></pre></div></td></tr></table></figure>
+
+<img src="/2021/07/28/DBNet-%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90-%E5%AE%9E%E8%B7%B5%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%8F%8A%E8%BF%90%E8%A1%8C/14.png" srcset="/img/loading.gif" lazyload style="zoom: 50%;">
+
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">step_function</span>(<span class="hljs-params">self, x, y</span>):</span><br>    <span class="hljs-keyword">return</span> torch.reciprocal(<span class="hljs-number">1</span> + torch.exp(-self.k * (x - y)))<br>    <span class="hljs-comment"># 这个step_function就是Differentiable binarization的公式</span><br></code></pre></div></td></tr></table></figure>
+
+<p><strong>流程：</strong>主model.py最终从backbone–neck–DB得到的y，如果是训练，则传给train.py；如果是预测，则传给predict.py。</p>
+<h2 id="训练部分代码"><a href="#训练部分代码" class="headerlink" title="训练部分代码"></a>训练部分代码</h2><h4 id="tools-train-py"><a href="#tools-train-py" class="headerlink" title="tools/train.py"></a><code>tools/train.py</code></h4><p> 一些训练的设置，重点是其在评估方法时，采用的是<code>quad_metric.py</code>中的方法</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># 后处理，获取文本框，这里也是一个重要的步骤</span><br>post_p = get_post_processing(config[<span class="hljs-string">&#x27;post_processing&#x27;</span>])<br><br><span class="hljs-comment"># 在utils文件夹下的ocr_metric中，传入metric配置信息，实例化一个metric</span><br><span class="hljs-comment"># 从配置信息可以看处，config[&#x27;metric&#x27;]中配置的信息是</span><br><span class="hljs-comment"># utils文件夹下，ocr_metric文件夹下，icdar2015文件夹下的quad_metric.py文件</span><br><span class="hljs-comment"># 所使用的方法也就是quad_metric</span><br><span class="hljs-comment"># 用法就是：每多少个epoch，调用其measure函数，就进行一下评估，</span><br><span class="hljs-comment"># 评估的东西可以从trainer.train()中看出，是boxes和scores两个东西，</span><br><span class="hljs-comment"># metric_cls.validate_measure(batch, (boxes, scores))</span><br><span class="hljs-comment"># boxes, scores = self.post_process(batch, preds,is_output_polygon=self.metric_cls.is_output_polygon)</span><br><span class="hljs-comment"># 这两个是通过后处理post_process得到的&quot;构成原文本框的的所有点boxes&quot;和&quot;一个文本框的概率均值scores&quot;</span><br><br><span class="hljs-comment"># 当然不止，quad_metric总共有三个评估措施</span><br><span class="hljs-comment"># validate_measure()，evaluate_measure()，gather_measure()</span><br><span class="hljs-comment"># 返回一个result</span><br>metric = get_metric(config[<span class="hljs-string">&#x27;metric&#x27;</span>])<br></code></pre></div></td></tr></table></figure>
+
+
+
+<h4 id="trainer-trainer-py-重点：其中评估方法quad-metric-py文件"><a href="#trainer-trainer-py-重点：其中评估方法quad-metric-py文件" class="headerlink" title="trainer/trainer.py                        重点：其中评估方法quad_metric.py文件"></a><code>trainer/trainer.py</code>                        <strong>重点：</strong>其中评估方法quad_metric.py文件</h4><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># preds：从网络模型的head中输出的一个二维的包含probability map和threshold map两个张量的张量</span><br>            preds = self.model(batch[<span class="hljs-string">&#x27;img&#x27;</span>])<br>        <br>     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">_eval</span>(<span class="hljs-params">self, epoch</span>):</span> <br><span class="hljs-comment">#==========================================================================================</span><br>                <span class="hljs-comment"># 将每一个批量的boxes(预测框的点)和scores传入metric_cls中的评估方法中</span><br>                <span class="hljs-comment"># 这个metric_cls是在utils文件夹下，ocr_metric文件夹下，</span><br>                <span class="hljs-comment"># icdar2015文件夹下的quad_metric.py文件中的方法</span><br>                <span class="hljs-comment"># 疯狂套娃，各种递归传回，太累了</span><br>                <span class="hljs-comment"># 这里raw_metric最终得到的是经过最终在utils/ocr_metric/icdar2015/detection/iou.py文件传回的</span><br>                <span class="hljs-comment"># 含有recall, precision，iou等一系列的值</span><br>                <span class="hljs-comment"># 这一系列的值用一个字典的形式传回给raw_metric</span><br><br>                <span class="hljs-comment"># raw_metric是从iou.py文件中返回的一个batch的评估信息字典</span><br>                raw_metric = self.metric_cls.validate_measure(batch, (boxes, scores))<br>                raw_metrics.append(raw_metric) <span class="hljs-comment"># 有很多个batch</span><br>        <span class="hljs-comment"># 用quad_metric.py文件中的gather_measure函数</span><br>        <span class="hljs-comment"># 求整个数据集的recall，precision等评估结果</span><br>        <span class="hljs-comment"># metrics 才是整个数据集的评估信息字典</span><br>        <span class="hljs-comment"># 这里的metrics是调用了quad_metric.py文件中的gather_measure方法</span><br>        metrics = self.metric_cls.gather_measure(raw_metrics)<br>        <br></code></pre></div></td></tr></table></figure>
+
+<h4 id="训练的batch以及总体的评估"><a href="#训练的batch以及总体的评估" class="headerlink" title="训练的batch以及总体的评估"></a>训练的batch以及总体的评估</h4><h5 id="utils-ocr-metric-icdar2015-quad-metric-py"><a href="#utils-ocr-metric-icdar2015-quad-metric-py" class="headerlink" title="utils/ocr_metric/icdar2015/quad_metric.py"></a><code>utils/ocr_metric/icdar2015/quad_metric.py</code></h5><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">QuadMetric</span>():</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self, is_output_polygon=<span class="hljs-literal">False</span></span>):</span><br>        self.is_output_polygon = is_output_polygon<br><span class="hljs-comment">#------------------------------------------------------------------------------------</span><br>        <span class="hljs-comment"># DetectionIoUEvaluator是评估器(核心，重点)，最终的评估是在这里面完成</span><br>        <span class="hljs-comment"># 然后将结果返回给evaluator</span><br>        <span class="hljs-comment"># 这个DetectionIoUEvaluator方法是utils文件夹下，ocr_metric文件夹下，icdar2015文件夹下，</span><br>        <span class="hljs-comment"># 的detection文件夹下的iou.py文件中的一个检测评估类</span><br>        self.evaluator = DetectionIoUEvaluator(is_output_polygon=is_output_polygon)<br><span class="hljs-comment">#------------------------------------------------------------------------------------</span><br><br>    <span class="hljs-comment"># 主方法，下面三个方法其实都是调用measure的</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">measure</span>(<span class="hljs-params">self, batch, output, box_thresh=<span class="hljs-number">0.6</span></span>):</span><br>        <span class="hljs-comment"># 从predict.py中传入的batch是一个字典，[(h,w)]的键是shape</span><br>        <span class="hljs-comment"># h和w代表了原始图片的高度和宽度</span><br>        <span class="hljs-comment"># batch = &#123;&#x27;shape&#x27;: [(h, w)]&#125;</span><br>        <span class="hljs-comment"># 也就是第二个batch</span><br><br>        <span class="hljs-comment"># 从trainer.py中传入的batch可以理解为笼统的batch含义，也就是若干图片</span><br><br>        results = []<br>        <span class="hljs-comment"># 表示有若干个图片，每个图片都有若干个文字框的gt，点坐标</span><br>        <span class="hljs-comment"># 正确的标注就是是groundtruth，用图像标注工具标注的</span><br>        gt_polyons_batch = batch[<span class="hljs-string">&#x27;text_polys&#x27;</span>]<br>        ignore_tags_batch = batch[<span class="hljs-string">&#x27;ignore_tags&#x27;</span>]<br><br><br>        <span class="hljs-comment"># for循环遍历每一张图片，得到这张图片的所有多边形框</span><br>        <span class="hljs-comment"># 包括gt，预测框，分数等内容</span><br>        <span class="hljs-keyword">for</span> polygons, pred_polygons, pred_scores, ignore_tags <span class="hljs-keyword">in</span> <span class="hljs-built_in">zip</span>(gt_polyons_batch, pred_polygons_batch, pred_scores_batch, ignore_tags_batch):<br>            <span class="hljs-comment"># 将gt整理成一个列表，每个元素是个字典，代表对应文字框的点坐标和是否忽略</span><br>            gt = [<span class="hljs-built_in">dict</span>(points=np.int64(polygons[i]), ignore=ignore_tags[i]) <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(polygons))]<br>            <span class="hljs-keyword">if</span> self.is_output_polygon: <span class="hljs-comment"># 如果要输出的是多边形</span><br>                pred = [<span class="hljs-built_in">dict</span>(points=pred_polygons[i]) <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(pred_polygons))]<br>            <span class="hljs-keyword">else</span>: <span class="hljs-comment"># 如果输出的是矩形，则还要做一个过滤(if pred_scores[i] &gt;= box_thresh(0.6))</span><br>                <span class="hljs-comment"># 意思是说：如果矩形框(文本框)内的文字区域如果是一个极度细长且极度弯曲的文字区域，那么</span><br>                <span class="hljs-comment"># 即使文字区域概率全为1，非文字区域概率全为0，和gt(手工标记的)结果是一样的</span><br>                <span class="hljs-comment"># 但由于pred_scores[i]是计算得到这个文本框内的概率均值，它是由</span><br>                <span class="hljs-comment"># 文字区域的概率，和非文字区域的概率共同决定的一个均值</span><br>                <span class="hljs-comment"># 因为这个矩形文本框中，绝大多数都是非文字区域，</span><br>                <span class="hljs-comment"># 所以计算出来的文本框概率均值可能就会小于box_thresh</span><br>                <span class="hljs-comment"># 如果小于，也就说明这个文字区域是极度弯曲细长的，这样的文本框送给crnn做识别</span><br>                <span class="hljs-comment"># 或者其实给人肉眼看，都没有什么实际意义，所以就将其忽略。</span><br><br>                <span class="hljs-comment"># 如果大于box_thresh(0.6)，则将其放入pred列表中</span><br><br>            <span class="hljs-comment"># 将上述的经过极端情况过滤后的pred列表，以及gt列表，一起传入evaluator方法中</span><br>            <span class="hljs-comment"># 来计算一个batch的</span><br>            <span class="hljs-comment"># 经过for循环，将每个batch中的评估信息，</span><br>            <span class="hljs-comment"># 以字典的形式传入results列表中</span><br>            results.append(self.evaluator.evaluate_image(gt, pred))<br>            <span class="hljs-comment"># 这里重点：evaluator这个是什么，它是从./detection/iou中</span><br>            <span class="hljs-comment"># import 的一个 DetectionIoUEvaluator类</span><br>        <span class="hljs-comment"># 最终返回results列表给trainer.py</span><br>        <span class="hljs-keyword">return</span> results<br><br>    <span class="hljs-comment"># 该方法返回的是一个batch的评估结果，以字典的形式</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">validate_measure</span>(<span class="hljs-params">self, batch, output, box_thresh=<span class="hljs-number">0.6</span></span>):</span><br>        <span class="hljs-keyword">return</span> self.measure(batch, output, box_thresh)<br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">evaluate_measure</span>(<span class="hljs-params">self, batch, output</span>):</span><br>        <span class="hljs-keyword">return</span> self.measure(batch, output), np.linspace(<span class="hljs-number">0</span>, batch[<span class="hljs-string">&#x27;image&#x27;</span>].shape[<span class="hljs-number">0</span>]).tolist()<br><br>    <span class="hljs-comment"># 这个方法则是返回所有batch组合(也就是一个数据集)的评估结果</span><br>    <span class="hljs-comment"># raw_metrices是从trainer.py文件中传过来的，</span><br>    <span class="hljs-comment"># 它里面存的是每一个batch所得到的一个评估结果</span><br>    <span class="hljs-comment"># 也就是for循环调用validate_measure之后得到的一个评估合集</span><br>    <span class="hljs-comment"># 现在将这个合集传入gather_measure方法中，</span><br>    <span class="hljs-comment"># 通过这个方法，将这个合集中每一个batch的评估结果进行一个整合</span><br>    <span class="hljs-comment"># 这个方法返回给trainer.py的是整个数据集的一个评估结果</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">gather_measure</span>(<span class="hljs-params">self, raw_metrics</span>):</span><br>        <span class="hljs-comment"># 展平，raw_metrices中的每个元素都是一个batch的评估结果</span><br>        raw_metrics = [image_metrics<br>                       <span class="hljs-keyword">for</span> batch_metrics <span class="hljs-keyword">in</span> raw_metrics<br>                       <span class="hljs-keyword">for</span> image_metrics <span class="hljs-keyword">in</span> batch_metrics]<br><br>        <span class="hljs-comment"># 将raw_metrices传入iou.py文件中的combine_results方法</span><br>        result = self.evaluator.combine_results(raw_metrics)<br><span class="hljs-comment">#=================================================================================</span><br><br>        <span class="hljs-comment"># 将整个数据集的评估结果返回个trainer.py文件中的metrics</span><br>        <span class="hljs-keyword">return</span> &#123;<br>            <span class="hljs-string">&#x27;precision&#x27;</span>: precision,<br>            <span class="hljs-string">&#x27;recall&#x27;</span>: recall,<br>            <span class="hljs-string">&#x27;fmeasure&#x27;</span>: fmeasure<br>        &#125;<br></code></pre></div></td></tr></table></figure>
+
+<h5 id="utils-ocr-metric-icdar2015-detection-iou-py"><a href="#utils-ocr-metric-icdar2015-detection-iou-py" class="headerlink" title="utils/ocr_metric/icdar2015/detection/iou.py"></a><code>utils/ocr_metric/icdar2015/detection/iou.py</code></h5><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">    <br><span class="hljs-comment"># gt是从quad_metric.py中一张图片的多个正确文本框标记</span><br><span class="hljs-comment"># pred也是从quad_metric.py中传入的，是一个存有一张图片中多个probability map的列表</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">evaluate_image</span>(<span class="hljs-params">self, gt, pred</span>):</span> <span class="hljs-comment"># 核心评估函数，评估的是一张图中的若干文字框    </span><br></code></pre></div></td></tr></table></figure>
+
+<img src="/2021/07/28/DBNet-%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90-%E5%AE%9E%E8%B7%B5%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%8F%8A%E8%BF%90%E8%A1%8C/15.png" srcset="/img/loading.gif" lazyload style="zoom: 50%;">
+
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_union</span>(<span class="hljs-params">pD, pG</span>):</span> <span class="hljs-comment"># 求并集</span><br>    <span class="hljs-keyword">return</span> Polygon(pD).union(Polygon(pG)).area<br><br><span class="hljs-comment"># iou 计算的是 “预测的边框” 和 “真实的边框” 的交集和并集的比值</span><br><span class="hljs-comment"># 即iou = get_intersection(pD, pG) / get_union(pD,pG)</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_intersection_over_union</span>(<span class="hljs-params">pD, pG</span>):</span> <span class="hljs-comment"># 求iou</span><br>    <span class="hljs-keyword">return</span> get_intersection(pD, pG) / get_union(pD, pG)<br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_intersection</span>(<span class="hljs-params">pD, pG</span>):</span> <span class="hljs-comment"># 求交集</span><br>    <span class="hljs-keyword">return</span> Polygon(pD).intersection(Polygon(pG)).area<br></code></pre></div></td></tr></table></figure>
+
+<p><strong>Precision精确率， Recall召回率，是二分类问题常用的评价指标。</strong></p>
+<figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-comment"># Num det = n</span><br><span class="hljs-comment"># Num pred = m</span><br><span class="hljs-comment"># care det = n&#x27;</span><br><span class="hljs-comment"># care pred = m&#x27;</span><br><span class="hljs-comment"># matched = k  #表示匹配的个数</span><br><span class="hljs-comment"># recall = k / n&#x27;</span><br><span class="hljs-comment"># precision = k / m&#x27;</span><br><span class="hljs-comment"># 计算recall和precision</span><br></code></pre></div></td></tr></table></figure>
+
+<h2 id="预测部分代码"><a href="#预测部分代码" class="headerlink" title="预测部分代码"></a>预测部分代码</h2><h4 id="tools-predict-py"><a href="#tools-predict-py" class="headerlink" title="tools/predict.py"></a><code>tools/predict.py</code></h4><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># -----------------------------------------------------------------------</span><br>        <span class="hljs-comment">#配置重点：get_post_processing 是获得预测的文本框，</span><br>        <span class="hljs-comment"># 其中根据已配置的文件config中确定的post_processing，</span><br>        <span class="hljs-comment"># 我们选择的post_processing是post_processing文件夹下的</span><br>        <span class="hljs-comment"># seg_detector_representer.py文件</span><br>        self.post_process = get_post_processing(config[<span class="hljs-string">&#x27;post_processing&#x27;</span>])<br>        self.post_process.box_thresh = post_p_thre<br>        <span class="hljs-comment"># 目前只是确定了(配置好)后处理获取文本框所需要用到的方法是</span><br>        <span class="hljs-comment"># SegDetectorRepresenter，在下面的预测中才实际使用它</span><br><span class="hljs-comment"># -----------------------------------------------------------------------</span><br></code></pre></div></td></tr></table></figure>
+
+<img src="/2021/07/28/DBNet-%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90-%E5%AE%9E%E8%B7%B5%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%8F%8A%E8%BF%90%E8%A1%8C/16.png" srcset="/img/loading.gif" lazyload style="zoom: 90%;">
+
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment">#--------------------------------------------------------------------------</span><br>            <span class="hljs-comment"># preds：从网络模型的head中输出的一个二维的包含probability map和threshold map两个张量的张量</span><br>            <span class="hljs-comment"># preds是models文件下的model.py中的forward函数中return的y</span><br>            <span class="hljs-comment"># preds的第0个维度为probability map，第二个维度为threshold map</span><br>            preds = self.model(tensor)<br>            <span class="hljs-keyword">if</span> <span class="hljs-built_in">str</span>(self.device).__contains__(<span class="hljs-string">&#x27;cuda&#x27;</span>):<br>                <span class="hljs-comment"># 等待CUDA上所有流中的所有核心上的操作都完成，使得测试出来的时间更加准确</span><br>                torch.cuda.synchronize(self.device)<br><span class="hljs-comment">#-------------------------------------------------------------------------------</span><br><span class="hljs-comment">#-------------------------------------------------------------------------------</span><br>            <span class="hljs-comment">#获取文本框，实际重点：</span><br>            <span class="hljs-comment"># 后处理后得到最终的文本框box_list</span><br>            <span class="hljs-comment"># 将batch和preds传到post_processing文件夹下的seg_detector_representer.py文件夹下的</span><br>            <span class="hljs-comment"># def __call__():</span><br>            box_list, score_list = self.post_process(batch, preds, is_output_polygon=is_output_polygon)<br>            <span class="hljs-comment"># 因为预测的图片只有一张，所以只需要获取第一个即可</span><br>            box_list, score_list = box_list[<span class="hljs-number">0</span>], score_list[<span class="hljs-number">0</span>]<br><span class="hljs-comment">#--------------------------------------------------------------------------------</span><br></code></pre></div></td></tr></table></figure>
+
+<h4 id="重点：进行后处理操作"><a href="#重点：进行后处理操作" class="headerlink" title="重点：进行后处理操作"></a>重点：进行后处理操作</h4><p>训练或者预测中====</p>
+<p>用来获取训练<code>train.py</code>时的train数据集中的文本框，</p>
+<p>预测<code>predict.py</code>待预测图片的文本框的操作</p>
+<p> <code>post_processing/seg_detector_representer.py</code></p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># thresh=0.3将用于一个传统的二值化操作，box_thresh筛掉一些无用的文字区域，</span><br>    <span class="hljs-comment"># max_candidates是指一张图片的文字区域最多为1000</span><br>    <span class="hljs-comment"># unclip_ratio(膨胀比率)：因为probability map是shrink后的图片，</span><br>    <span class="hljs-comment"># 需要通过unclip_ratio经过一个公式D‘计算后将probability map经过dilated(膨胀)</span><br>    <span class="hljs-comment"># 来得到一个和文字区域相同的map，unrlip_ratio就是该公式D’的r&#x27;,设置为1.5</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self, thresh=<span class="hljs-number">0.3</span>, box_thresh=<span class="hljs-number">0.7</span>, max_candidates=<span class="hljs-number">1000</span>, unclip_ratio=<span class="hljs-number">1.5</span></span>):</span><br>        <br><span class="hljs-comment">#====================================================================================================        </span><br><span class="hljs-comment"># 这里的的batch和pred是从tools文件夹下的predict.py</span><br><span class="hljs-comment"># 或者trainer文件夹下的trainer.py中传过来的batch和preds</span><br><br><span class="hljs-comment"># 最终要将boxes, scores返回给predict.py的两个变量box_list, score_list</span><br><span class="hljs-comment"># 或者返回给trainer.py中的boxes和scores</span><br><span class="hljs-comment"># 即 return boxes, scores</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__call__</span>(<span class="hljs-params">self, batch, pred, is_output_polygon=<span class="hljs-literal">False</span></span>):</span><br>    <br><span class="hljs-comment">#=====================================================================================================</span><br>            <span class="hljs-comment"># 将box存入boxes中，并传入</span><br>            boxes.append(box)<br>            <span class="hljs-comment"># 将函数box_score_fast()计算出来的一张图片的一个文本框的概率均值存入scores</span><br>            scores.append(score)<br>        <span class="hljs-comment"># 将两者分别传回给tools文件夹中的predict.py中的box_list, score_list</span><br>        <span class="hljs-comment"># 并在predict.py中</span><br>        <span class="hljs-comment"># 如果是训练阶段，则似乎将boxes，scores传回给trainer.py中的boxes，scores</span><br>        <span class="hljs-keyword">return</span> boxes, scores<br></code></pre></div></td></tr></table></figure>
+
+
+
+<h2 id="label标签制作"><a href="#label标签制作" class="headerlink" title="label标签制作"></a>label标签制作</h2><p>根据人工标记的gt框(一系列坐标点)，进行一些膨胀(dilate)和缩小(shrink)的操作</p>
+<p>膨胀和缩小的距离：<img src="/2021/07/28/DBNet-%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90-%E5%AE%9E%E8%B7%B5%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%8F%8A%E8%BF%90%E8%A1%8C/19.png" srcset="/img/loading.gif" lazyload style="zoom: 67%;"></p>
+<p>并且做一些gt框内的计算来得到<code>probability_map</code>和<code>threshold_map</code></p>
+<h4 id="data-loader-modules-make-shrink-map-py"><a href="#data-loader-modules-make-shrink-map-py" class="headerlink" title="data_loader/modules/make_shrink_map.py"></a>data_loader/modules/make_shrink_map.py<img src="/2021/07/28/DBNet-%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90-%E5%AE%9E%E8%B7%B5%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%8F%8A%E8%BF%90%E8%A1%8C/20.png" srcset="/img/loading.gif" lazyload style="zoom: 67%;"></h4><h5 id="一个shrink操作："><a href="#一个shrink操作：" class="headerlink" title="一个shrink操作："></a>一个shrink操作：</h5><p>红框为gt框，蓝框为shrink后的结果</p>
+<img src="/2021/07/28/DBNet-%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90-%E5%AE%9E%E8%B7%B5%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%8F%8A%E8%BF%90%E8%A1%8C/17.png" srcset="/img/loading.gif" lazyload style="zoom: 50%;">
+
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># 所采用的shrink方法         多边形的一系列点， 需要shrink的比率，按照ppt上，所采用的比率为0.4</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">shrink_polygon_pyclipper</span>(<span class="hljs-params">polygon, shrink_ratio</span>):</span><br>    <span class="hljs-keyword">from</span> shapely.geometry <span class="hljs-keyword">import</span> Polygon<br>    <span class="hljs-keyword">import</span> pyclipper <span class="hljs-comment"># 该库是创建一个多边形来对原图进行修改，既可以缩小，也可以膨胀</span><br>    polygon_shape = Polygon(polygon) <span class="hljs-comment"># 创建多边形</span><br>    <span class="hljs-comment"># distance的公式是ppt20页的，用来计算具体的一个缩小范围</span><br>    distance = polygon_shape.area * (<span class="hljs-number">1</span> - np.power(shrink_ratio, <span class="hljs-number">2</span>)) / polygon_shape.length<br><br>    subject = [<span class="hljs-built_in">tuple</span>(l) <span class="hljs-keyword">for</span> l <span class="hljs-keyword">in</span> polygon]<br>    padding = pyclipper.PyclipperOffset()<br>    padding.AddPath(subject, pyclipper.JT_ROUND, pyclipper.ET_CLOSEDPOLYGON)<br><br>    <span class="hljs-comment"># 因为distance是一个整数，我们需要的是shrink而不是膨胀，所以输入-distance</span><br>    shrinked = padding.Execute(-distance)<br>    <span class="hljs-keyword">if</span> shrinked == []:<br>        shrinked = np.array(shrinked)<br>    <span class="hljs-keyword">else</span>:<br>        shrinked = np.array(shrinked[<span class="hljs-number">0</span>]).reshape(-<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)<br>    <span class="hljs-keyword">return</span> shrinked <span class="hljs-comment"># 返回ppt20页中的构成红框内的“蓝框”的所有点的坐标，蓝框是将红框shrink后得到的</span><br></code></pre></div></td></tr></table></figure>
+
+<h4 id="data-loader-modules-make-border-map-py"><a href="#data-loader-modules-make-border-map-py" class="headerlink" title="data_loader/modules/make_border_map.py"></a>data_loader/modules/make_border_map.py<img src="/2021/07/28/DBNet-%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90-%E5%AE%9E%E8%B7%B5%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%8F%8A%E8%BF%90%E8%A1%8C/21.png" srcset="/img/loading.gif" lazyload style="zoom: 67%;"></h4><h5 id="shrink操作-dilate操作："><a href="#shrink操作-dilate操作：" class="headerlink" title="shrink操作 + dilate操作："></a>shrink操作 + dilate操作：</h5><p>红框为gt框，蓝框为shrink框，绿框为dilate框</p>
+<img src="/2021/07/28/DBNet-%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90-%E5%AE%9E%E8%B7%B5%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%8F%8A%E8%BF%90%E8%A1%8C/18.png" srcset="/img/loading.gif" lazyload style="zoom: 67%;">
+
+<img src="/2021/07/28/DBNet-%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90-%E5%AE%9E%E8%B7%B5%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%8F%8A%E8%BF%90%E8%A1%8C/24.png" srcset="/img/loading.gif" lazyload style="zoom: 50%;">
+
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># 和shrink_map中的公式一样</span><br>distance = polygon_shape.area * (<span class="hljs-number">1</span> - np.power(self.shrink_ratio, <span class="hljs-number">2</span>)) / polygon_shape.length<br>subject = [<span class="hljs-built_in">tuple</span>(l) <span class="hljs-keyword">for</span> l <span class="hljs-keyword">in</span> polygon]<br>padding = pyclipper.PyclipperOffset()<br>padding.AddPath(subject, pyclipper.JT_ROUND,<br>                pyclipper.ET_CLOSEDPOLYGON)<br><br><span class="hljs-comment"># 传入正的distance，即膨胀操作，膨胀后得到的是ppt40页中的绿色框</span><br>padded_polygon = np.array(padding.Execute(distance)[<span class="hljs-number">0</span>])<br></code></pre></div></td></tr></table></figure>
+
+
+
+<img src="/2021/07/28/DBNet-%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90-%E5%AE%9E%E8%B7%B5%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%8F%8A%E8%BF%90%E8%A1%8C/25.png" srcset="/img/loading.gif" lazyload style="zoom: 80%;">
+
+<p>  处理后的Distance map       <img src="/2021/07/28/DBNet-%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90-%E5%AE%9E%E8%B7%B5%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%8F%8A%E8%BF%90%E8%A1%8C/26.png" srcset="/img/loading.gif" lazyload style="zoom: 80%;"></p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># 这样一来，在绿框中，绿框到蓝框边的所有区域的点在distance_map中取值为0</span><br><span class="hljs-comment"># 蓝框内的所有点在distance_map中取值为1</span><br>distance_map[i] = np.clip(absolute_distance / distance, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>)<br>    <br><span class="hljs-comment"># 1 - distance_map 其实算是一个将distance_map内的每个点的值的取反的操作。    </span><br><span class="hljs-comment"># 这里的canvas可以看作gt图，下面的操作，其实就是根据上面求出点的distance_map图中的值</span><br><span class="hljs-comment"># 对canvas进行一个填充，填充的结果图在ppt46页左下角的gt图，</span><br><span class="hljs-comment"># gt图中很大区域是灰色的原因是因为前面初始化gt图时，将里面的点的值设为了0-1之间，所以才为灰色</span><br>canvas[ymin_valid:ymax_valid + <span class="hljs-number">1</span>, xmin_valid:xmax_valid + <span class="hljs-number">1</span>] = np.fmax(<br>    <span class="hljs-number">1</span> - distance_map[<br>        ymin_valid - ymin:ymax_valid - ymax + height,<br>        xmin_valid - xmin:xmax_valid - xmax + width],<br>    canvas[ymin_valid:ymax_valid + <span class="hljs-number">1</span>, xmin_valid:xmax_valid + <span class="hljs-number">1</span>])<br></code></pre></div></td></tr></table></figure>
+
+
+
+<h4 id="两个map的计算"><a href="#两个map的计算" class="headerlink" title="两个map的计算"></a>两个map的计算</h4><p>shrink_map 和 dilate_map的一个计算<img src="/2021/07/28/DBNet-%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90-%E5%AE%9E%E8%B7%B5%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%8F%8A%E8%BF%90%E8%A1%8C/23.png" srcset="/img/loading.gif" lazyload style="zoom: 50%;"></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Pytorch/">Pytorch</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/OCR/">OCR</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/08/07/Latex%E8%AE%BA%E6%96%87%E6%A0%B7%E5%BC%8F/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Latex论文样式</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/07/23/Java%E8%BF%9E%E6%8E%A5mysql8-0/">
+                        <span class="hidden-mobile">Java连接mysql8.0</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+  <!-- 引用依赖 -->
+<link rel="stylesheet" 
+href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@1.2.0/dist/Meting.min.js"></script>
+
+<!-- 我使用的APlayer本体 -->
+<div class="aplayer" 
+data-id="6724136629" 
+data-server="netease" 
+data-type="playlist" 
+data-fixed="true" 
+data-autoplay="false" 
+data-order="random" 
+data-volume="0.55" 
+data-theme="#cc543a" 
+data-preload="auto" >
+</div>
+<!--如果将本体放在body里面导致页面加载出现问题，请尝试放到body体后面-->
+
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<!--浏览器搞笑标题-->
+<script type="text/javascript" src="\js\FunnyTitle.js"></script>
+
+<script src="/live2d/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2d/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"display":{"position":"right","width":300,"height":600,"hOffset":-60,"vOffset":-140},"mobile":{"show":true},"model":{"scale":1.2,"jsonPath":"/live2d/assets/Yuri.model.json"},"log":false});</script></body>
+</html>
