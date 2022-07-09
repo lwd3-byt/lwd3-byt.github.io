@@ -184,7 +184,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      647 字
+      2.2k 字
     </span>
   
 
@@ -194,7 +194,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      7
+      29
        分钟
     </span>
   
@@ -299,7 +299,8 @@
 
 
 <p>对`index.js 代码进行删除(下图为删除后的样子)</p>
-<p> <strong>index.js非常重要，但目前还无法总结，但记住它可以连接和部署非常多的东西</strong></p>
+<p><strong>index.js非常重要，但目前还无法总结，但记住它可以连接和部署非常多的东西</strong></p>
+<p><strong>可以把它当作所有内容的总入口和总出口</strong></p>
 <img src="/2022/07/05/React-%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/12.png" srcset="/img/loading.gif" lazyload style="zoom: 67%;">
 
 
@@ -312,9 +313,98 @@
 <p>首先可以在<strong>index.js</strong>中引入<strong>bootstrap</strong>的样式文件和对应的<strong>js</strong></p>
 <figure class="highlight jsx"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jsx"><span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;bootstrap/dist/css/bootstrap.css&#x27;</span>;<br><span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;bootstrap/dist/js/bootstrap&#x27;</span>;<br></code></pre></div></td></tr></table></figure>
 
+</blockquote>
+<h4 id="初步设计一个网页"><a href="#初步设计一个网页" class="headerlink" title="初步设计一个网页"></a>初步设计一个网页</h4><blockquote>
+<p>由于React为数据驱动型，所以在构建不同组件时，要注意从上往下，从整体到局部的思想。</p>
+<p>在<strong>src</strong>文件夹下创建一个<strong>components</strong>文件夹，用来存放我们构建网页时，自己写的所有组件和子组件，其中<strong>app.jsx</strong>可以是单独一个网页的组件，<strong>content</strong>文件夹下的<strong>navbar.jsx子组件</strong>可以是网页的导航栏</p>
+<img src="/2022/07/05/React-%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/14.png" srcset="/img/loading.gif" lazyload>
 
 
-<p>在src文件夹下创建一个components文件夹，用来存放我们构建网页时，自己写的所有组件和子组件</p>
+
+<p>接下来需要先完善<strong>app.jsx</strong>中的内容，然后再将其引入<strong>index.js</strong>中</p>
+<p>自定义组件一般可以分为类组件和函数组件两种(虽然网上评价更偏向使用函数组件，但由于我先学到类组件，所以这里先用类组件实现)</p>
+<p>在App.jsx中</p>
+<p>一些快捷补全方法 输入 <code>imrc</code> 然后按 <code>Tab</code> 键可以得到代码</p>
+<figure class="highlight jsx"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jsx"><span class="hljs-keyword">import</span> React, &#123; Component &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;<br></code></pre></div></td></tr></table></figure>
+
+<p>输入 <code>cc</code> 按 <code>Tab</code> 键可以得到代码，补全后，可以直接命名类组件并将其暴露出去</p>
+<figure class="highlight jsx"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jsx"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">App</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>&#123;<br>    state = &#123;  &#125; <br>    <span class="hljs-function"><span class="hljs-title">render</span>(<span class="hljs-params"></span>)</span> &#123; <br>        <span class="hljs-keyword">return</span> (<br>            <span class="hljs-comment">// React.Fragment可以看作一个虚的div块，</span><br>            <span class="hljs-comment">// 在里面可以写多个节点的html内容</span><br>            &lt;React.Fragment&gt; <br><br>            &lt;/React.Fragment&gt;<br>        );<br>    &#125;<br>&#125;<br> <br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> App;<br></code></pre></div></td></tr></table></figure>
+
+<img src="/2022/07/05/React-%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/15.png" srcset="/img/loading.gif" lazyload style="zoom:67%;">
+
+<p>在 <code>&lt;React.Fragment&gt;&lt;/React.Fragment&gt;</code> 中尝试写下该内容</p>
+<figure class="highlight jsx"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jsx">&lt;React.Fragment&gt; <br>    &lt;h1&gt;Hello World&lt;/h1&gt;<br>&lt;/React.Fragment&gt;<br></code></pre></div></td></tr></table></figure>
+
+
+
+<p>然后在 <strong>index.js</strong> 中</p>
+<p>引入 <strong>app类组件</strong>， 并使用它</p>
+<figure class="highlight jsx"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jsx"><span class="hljs-keyword">import</span> App <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./components/app&#x27;</span>;<br><br>root.render(<br>  <span class="hljs-comment">// React.StrictMode 为严格模式，会自动检测并提出一些错误或警告信息</span><br>  &lt;React.StrictMode&gt;<br>    &lt;App&gt;&lt;/App&gt;<br>  &lt;/React.StrictMode&gt;<br>);<br></code></pre></div></td></tr></table></figure>
+
+<p>这时，就可以在网页上显示app组件的”Hello World”了</p>
+<img src="/2022/07/05/React-%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/16.png" srcset="/img/loading.gif" lazyload style="zoom: 67%;">
+</blockquote>
+<h4 id="父子组件交互"><a href="#父子组件交互" class="headerlink" title="父子组件交互"></a>父子组件交互</h4><blockquote>
+<p>为了显示方便，我先构建 <strong><code>son.jsx</code></strong> 和 <strong><code>father.jsx</code></strong>  两个类组件(构建该方法与前面的app.jsx相同)</p>
+<p>并且将 <strong><code>father.jsx</code></strong> 直接引入 <strong><code>index.js</code></strong> </p>
+<figure class="highlight jsx"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jsx"><span class="hljs-keyword">import</span> Father <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./components/father&#x27;</span>;<br>&lt;React.StrictMode&gt;<br>    &lt;App&gt;&lt;/App&gt;<br>    &lt;Father&gt;&lt;/Father&gt;<br>&lt;/React.StrictMode&gt;<br></code></pre></div></td></tr></table></figure>
+
+
+
+<h5 id="this-props-children的使用"><a href="#this-props-children的使用" class="headerlink" title="this.props.children的使用"></a>this.props.children的使用</h5><blockquote>
+<p>当父组件调用子组件时，可以向子组件传递一些htmljsx子节点</p>
+<p>而这些子节点，可以通过在子组件中使用 <strong>this.props.children</strong> 来获得</p>
+<p>在<strong>father.jsx</strong>中</p>
+<figure class="highlight jsx"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jsx"><span class="hljs-keyword">import</span> React, &#123; Component &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;<br><span class="hljs-keyword">import</span> Son <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./content/son&#x27;</span>;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Father</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>&#123;<br>    state = &#123;  &#125; <br>    <span class="hljs-function"><span class="hljs-title">render</span>(<span class="hljs-params"></span>)</span> &#123; <br>        <span class="hljs-keyword">return</span> (<br>            &lt;React.Fragment&gt;<br>                &lt;Son&gt;<br>                    &lt;div&gt;<br>                        &lt;h1&gt;我是父节点在Son组件的文字&lt;/h1&gt;<br>                        &lt;h2&gt;我也是父节点在Son组件的文字&lt;/h2&gt;<br>                    &lt;/div&gt;<br>                &lt;/Son&gt;<br>            &lt;/React.Fragment&gt;<br>        );<br>    &#125;<br>&#125;<br> <br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> Father;<br></code></pre></div></td></tr></table></figure>
+
+<p>向Son组件传递的div块，不会立刻在网页中展示出来，需要先在 <strong>son.jsx</strong> 调用之后才能展示</p>
+<figure class="highlight jsx"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jsx"><span class="hljs-keyword">import</span> React, &#123; Component &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Son</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>&#123;<br>    state = &#123;  &#125; <br>    <span class="hljs-function"><span class="hljs-title">render</span>(<span class="hljs-params"></span>)</span> &#123; <br>        <span class="hljs-keyword">return</span> (<br>            &lt;React.Fragment&gt;<br>                &#123;<span class="hljs-built_in">this</span>.props.children&#125;<br>            &lt;/React.Fragment&gt;<br>        );<br>    &#125;<br>&#125;<br> <br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> Son;<br></code></pre></div></td></tr></table></figure>
+
+<img src="/2022/07/05/React-%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/17.png" srcset="/img/loading.gif" lazyload style="zoom: 67%;">
+</blockquote>
+<h5 id="函数、数据的传递和修改"><a href="#函数、数据的传递和修改" class="headerlink" title="函数、数据的传递和修改"></a>函数、数据的传递和修改</h5><blockquote>
+<p>在 <strong>father.jsx</strong> 中有一个 <strong>state</strong> 字典，用于存放该类组件的整体数据，可以在该类组件中通过 <strong>this.state.</strong> 较为方便地使用</p>
+<p>也可以通过this.setState进行修改，由此也可以看出，当state中由数据被修改，将会重新执行render()渲染函数</p>
+<figure class="highlight jsx"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jsx"><span class="hljs-keyword">import</span> React, &#123; Component &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;<br><span class="hljs-keyword">import</span> Son <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./content/son&#x27;</span>;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Father</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>&#123;<br>    state = &#123;<br>        string: <span class="hljs-string">&#x27;x的值为: &#x27;</span>, <br>        x: <span class="hljs-number">5</span>,<br>    &#125; <br><br>    changestate = <span class="hljs-function">() =&gt;</span> &#123;<br>        <span class="hljs-built_in">this</span>.setState(&#123;<br>            x: <span class="hljs-number">10</span>,<br>        &#125;)<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-title">render</span>(<span class="hljs-params"></span>)</span> &#123; <br>        <span class="hljs-keyword">return</span> (<br>            &lt;React.Fragment&gt;<br>                &lt;Son&gt;&lt;/Son&gt;<br>                &lt;div&gt;<br>                    &lt;h1&gt;&#123;<span class="hljs-built_in">this</span>.state.string + <span class="hljs-built_in">this</span>.state.x&#125;&lt;/h1&gt;<br>                    &lt;button onClick=&#123;<span class="hljs-built_in">this</span>.changestate&#125;&gt; 按钮: 按下后x值为<span class="hljs-number">10</span> &lt;/button&gt;<br>                &lt;/div&gt;<br>            &lt;/React.Fragment&gt;<br>        );<br>    &#125;<br>&#125;<br> <br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> Father;<br></code></pre></div></td></tr></table></figure>
+
+<img src="/2022/07/05/React-%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/18.png" srcset="/img/loading.gif" lazyload style="zoom: 67%;">
+
+<p>父组件可以自己定义函数，然后将<strong>html子节点</strong>通过<strong>this.props.children全部传给子组件</strong></p>
+<p>子组件只需通过<strong>this.props.children</strong>，也可以调用父组件的函数，对父组件的state进行修改</p>
+<figure class="highlight jsx"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jsx">&lt;Son&gt;<br>    &lt;div&gt;<br>        &lt;h1&gt;&#123;<span class="hljs-built_in">this</span>.state.string + <span class="hljs-built_in">this</span>.state.x&#125;&lt;/h1&gt;<br>        &lt;button onClick=&#123;<span class="hljs-built_in">this</span>.changestate&#125;&gt; 按钮: 按下后x值为<span class="hljs-number">10</span> &lt;/button&gt;<br>    &lt;/div&gt;<br>&lt;/Son&gt;<br></code></pre></div></td></tr></table></figure>
+
+
+
+<p>当然父组件可以将自己定义好的函数和数值，传给子组件，让子组件<strong>自由</strong>使用父组件的函数和数值</p>
+<p>方法如下:</p>
+<p>在父组件 <strong>father.jsx</strong> 中，将数据和函数以属性的方式，通过<code>&lt;Son&gt;&lt;/Son&gt;</code> 传给子组件 <strong>son.jsx</strong></p>
+<figure class="highlight jsx"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jsx"><span class="hljs-keyword">import</span> React, &#123; Component &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;<br><span class="hljs-keyword">import</span> Son <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./content/son&#x27;</span>;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Father</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>&#123;<br>    state = &#123;<br>        string: <span class="hljs-string">&#x27;x的值为: &#x27;</span>, <br>        x: <span class="hljs-number">5</span>,<br>    &#125; <br><br>    <span class="hljs-comment">// 注意: 这次调用函数需要传递参数,需要注意调用的具体格式要求</span><br>    changestate = <span class="hljs-function">(<span class="hljs-params">new_x</span>) =&gt;</span> &#123;<br>        <span class="hljs-built_in">this</span>.setState(&#123;<br>            x: new_x,<br>        &#125;)<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-title">render</span>(<span class="hljs-params"></span>)</span> &#123; <br>        <span class="hljs-keyword">return</span> (<br>            &lt;React.Fragment&gt;<br>                &lt;Son<br>                    data=&#123;<span class="hljs-built_in">this</span>.state&#125;<br>                    onClickChange=&#123;<span class="hljs-built_in">this</span>.changestate&#125;<br>                &gt;<br>                &lt;/Son&gt;<br>            &lt;/React.Fragment&gt;<br>        );<br>    &#125;<br>&#125;<br> <br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> Father;<br></code></pre></div></td></tr></table></figure>
+
+
+
+<p>在子组件 <strong>son.jsx</strong> 中，通过<strong>this.props</strong>可以调用父组件中传过来的属性名，根据这些属性名获取父组件中的数据和函数，而<strong>this</strong>也可以调用<strong>son.jsx</strong>组件中自己的<strong>state</strong>和函数等内容，具体细节看代码</p>
+<figure class="highlight jsx"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jsx"><span class="hljs-keyword">import</span> React, &#123; Component &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Son</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>&#123;<br>    state = &#123; <span class="hljs-attr">x</span>: <span class="hljs-number">20</span> &#125; <span class="hljs-comment">// 定义了一个x, 需要将其传给父组件的changestate函数</span><br>    <span class="hljs-function"><span class="hljs-title">render</span>(<span class="hljs-params"></span>)</span> &#123; <br>        <span class="hljs-keyword">return</span> (<br>            &lt;React.Fragment&gt;<br>                &lt;h1&gt;以下内容是在子组件中渲染的&lt;/h1&gt;<br>                &lt;div&gt;<br>                    &lt;h1&gt;X的值: &#123;<span class="hljs-built_in">this</span>.props.data.x&#125;&lt;/h1&gt;<br><br><br>                    &#123;<span class="hljs-comment">/* 当函数需要传参时可以这么写 */</span>&#125;<br>                    &lt;button onClick=&#123;<span class="hljs-function">()=&gt;</span>&#123;<span class="hljs-built_in">this</span>.props.onClickChange(<span class="hljs-built_in">this</span>.state.x)&#125;&#125;&gt;<br>                        按钮: 按下后x变为<span class="hljs-number">20</span><br>                    &lt;/button&gt;<br>                &lt;/div&gt;<br>            &lt;/React.Fragment&gt;<br>        );<br>    &#125;<br>&#125;<br> <br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> Son;<br></code></pre></div></td></tr></table></figure>
+
+<img src="/2022/07/05/React-%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/19.png" srcset="/img/loading.gif" lazyload style="zoom: 67%;">
+</blockquote>
+<h5 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h5><blockquote>
+<p>父子组件之间的交互暂时是这些，哪个组件被调用，则它就是调用它的父组件的子组件，类似于 <strong>树</strong></p>
+<p>但存在着一定的缺点：兄弟组件，或者多个组件之间，如果不是父子关系，就无法通过上述的this.props进行交互</p>
+<p>除非将所有函数和数据统一定义到根组件，在通过根组件逐渐往下传，这样是非常麻烦的</p>
+<img src="/2022/07/05/React-%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/20.png" srcset="/img/loading.gif" lazyload style="zoom: 67%;">
+
+
+
+<p>后续会通过 <strong>Redux</strong> 来进行数据的优化</p>
+<p><strong>Redux</strong></p>
+<blockquote>
+<ul>
+<li>redux 是一个独立专门用于做状态管理的 JS 库(不是 react 插件库) </li>
+<li>它可以用在 react, angular, vue 等项目中, 但基本与 react 配合使用 </li>
+<li>作用: 集中式管理 react 应用中多个组件共享的状态</li>
+</ul>
+</blockquote>
+</blockquote>
 </blockquote>
 
             </div>
