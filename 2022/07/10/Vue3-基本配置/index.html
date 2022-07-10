@@ -184,7 +184,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      5 字
+      776 字
     </span>
   
 
@@ -194,7 +194,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      11
        分钟
     </span>
   
@@ -227,7 +227,125 @@
             <h1 style="display: none">Vue3-基本配置</h1>
             
             <div class="markdown-body">
-              <h2 id="Vue3-基本配置"><a href="#Vue3-基本配置" class="headerlink" title="Vue3-基本配置"></a>Vue3-基本配置</h2>
+              <h2 id="Vue3-基本配置"><a href="#Vue3-基本配置" class="headerlink" title="Vue3-基本配置"></a>Vue3-基本配置</h2><h4 id="npm安装"><a href="#npm安装" class="headerlink" title="npm安装"></a>npm安装</h4><blockquote>
+<figure class="highlight coffeescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs coffeescript"><span class="hljs-built_in">npm</span> i -g @vue/cli<br></code></pre></div></td></tr></table></figure>
+
+<p>如果上述npm安装出现错误，可尝试的解决方案(不能解决所有问题)</p>
+<blockquote>
+<p>更改npm的全局安装路径  <a target="_blank" rel="noopener" href="https://blog.csdn.net/Ruaki/article/details/112788534">教程</a></p>
+<figure class="highlight swift"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs swift">npm config <span class="hljs-keyword">set</span> <span class="hljs-keyword">prefix</span> “[<span class="hljs-type">HTML_REMOVED</span>]“ <span class="hljs-comment">// 设置全局安装路径</span><br><br>例如：<br>npm config <span class="hljs-keyword">set</span> <span class="hljs-keyword">prefix</span> <span class="hljs-string">&quot;D:<span class="hljs-subst">\\</span>developmentEnvironment<span class="hljs-subst">\\</span>nodejs<span class="hljs-subst">\\</span>node_global&quot;</span><br></code></pre></div></td></tr></table></figure>
+
+<figure class="highlight arduino"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs arduino">npm config get prefix  <span class="hljs-comment">// 查看全局安装路径</span><br></code></pre></div></td></tr></table></figure>
+
+<img src="/2022/07/10/Vue3-%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/1.png" srcset="/img/loading.gif" lazyload style="zoom: 90%;">
+</blockquote>
+</blockquote>
+<h4 id="安装Nodejs"><a href="#安装Nodejs" class="headerlink" title="安装Nodejs"></a>安装Nodejs</h4><blockquote>
+<p><a target="_blank" rel="noopener" href="https://nodejs.org/en/">安装地址</a></p>
+</blockquote>
+<h4 id="Vscode安装一个插件-volar-，用于补全vue语法"><a href="#Vscode安装一个插件-volar-，用于补全vue语法" class="headerlink" title="Vscode安装一个插件(volar)，用于补全vue语法"></a>Vscode安装一个插件(volar)，用于补全vue语法</h4><blockquote>
+<figure class="highlight ebnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ebnf"><span class="hljs-attribute">volar</span><br></code></pre></div></td></tr></table></figure>
+
+<img src="/2022/07/10/Vue3-%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/17.png" srcset="/img/loading.gif" lazyload style="zoom: 67%;">
+</blockquote>
+<h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4><blockquote>
+<p><strong>Windows</strong> 用户建议全程使用 <strong>cmd</strong>，并且需要通过 <strong>管理员</strong> 的身份打开 <strong>cmd</strong></p>
+</blockquote>
+<h4 id="Vue-UI界面的启动以及一些插件和依赖的安装"><a href="#Vue-UI界面的启动以及一些插件和依赖的安装" class="headerlink" title="Vue UI界面的启动以及一些插件和依赖的安装"></a>Vue UI界面的启动以及一些插件和依赖的安装</h4><blockquote>
+<p>需要通过 <strong>cmd</strong> <strong>先进入</strong> 项目文件的位置，建<strong>议项目文件不要放在系统盘</strong>，否则后面在UI界面创建项目文件目录时可能会在系统盘位置一直加载</p>
+<img src="/2022/07/10/Vue3-%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/2.png" srcset="/img/loading.gif" lazyload style="zoom: 80%;">
+
+
+
+<p>启动后，会自动弹出网页</p>
+<img src="/2022/07/10/Vue3-%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/3.png" srcset="/img/loading.gif" lazyload style="zoom: 40%;">
+
+
+
+<img src="/2022/07/10/Vue3-%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/4.png" srcset="/img/loading.gif" lazyload style="zoom: 50%;">
+
+
+
+<img src="/2022/07/10/Vue3-%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/5.png" srcset="/img/loading.gif" lazyload style="zoom: 47%;">
+
+
+
+<p>创建成功后的项目界面</p>
+<img src="/2022/07/10/Vue3-%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/6.png" srcset="/img/loading.gif" lazyload style="zoom: 47%;">
+
+
+
+<p>接下来需要先安装一些插件</p>
+<img src="/2022/07/10/Vue3-%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/7.png" srcset="/img/loading.gif" lazyload style="zoom: 47%;">
+
+
+
+<figure class="highlight stata"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs stata">vue/<span class="hljs-keyword">cli</span>-<span class="hljs-keyword">plugin</span>-router<br><span class="hljs-comment">// 点击下载图标后，在右下角会有安装提示，一直确认下去完成安装即可</span><br></code></pre></div></td></tr></table></figure>
+
+<img src="/2022/07/10/Vue3-%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/8.png" srcset="/img/loading.gif" lazyload style="zoom: 67%;">
+
+<figure class="highlight stata"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs stata">vue/<span class="hljs-keyword">cli</span>-<span class="hljs-keyword">plugin</span>-vuex<br></code></pre></div></td></tr></table></figure>
+
+<img src="/2022/07/10/Vue3-%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/9.png" srcset="/img/loading.gif" lazyload style="zoom: 67%;">
+
+
+
+<p>插件安装完成后如下图所示</p>
+<img src="/2022/07/10/Vue3-%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/10.png" srcset="/img/loading.gif" lazyload style="zoom: 67%;">
+
+
+
+<p>与插件类似，目前还需要装一个依赖</p>
+<img src="/2022/07/10/Vue3-%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/11.png" srcset="/img/loading.gif" lazyload style="zoom: 50%;">
+
+<figure class="highlight ebnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ebnf"><span class="hljs-attribute">bootstrap</span><br></code></pre></div></td></tr></table></figure>
+
+<img src="/2022/07/10/Vue3-%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/12.png" srcset="/img/loading.gif" lazyload style="zoom: 50%;">
+</blockquote>
+<h4 id="启动项目"><a href="#启动项目" class="headerlink" title="启动项目"></a>启动项目</h4><blockquote>
+<img src="/2022/07/10/Vue3-%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/13.png" srcset="/img/loading.gif" lazyload style="zoom: 50%;">
+
+
+
+<img src="/2022/07/10/Vue3-%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/14.png" srcset="/img/loading.gif" lazyload style="zoom: 50%;">
+</blockquote>
+<h4 id="项目文件初始设置"><a href="#项目文件初始设置" class="headerlink" title="项目文件初始设置"></a>项目文件初始设置</h4><blockquote>
+<h5 id="删除一些文件"><a href="#删除一些文件" class="headerlink" title="删除一些文件"></a>删除一些文件</h5><img src="/2022/07/10/Vue3-%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/15.png" srcset="/img/loading.gif" lazyload style="zoom: 80%;">
+
+<h5 id="文件说明"><a href="#文件说明" class="headerlink" title="文件说明"></a>文件说明</h5><img src="/2022/07/10/Vue3-%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/16.png" srcset="/img/loading.gif" lazyload style="zoom: 80%;">
+
+
+
+<h5 id="App-vue-初始设置-template中的内容"><a href="#App-vue-初始设置-template中的内容" class="headerlink" title="App.vue 初始设置 (template中的内容)"></a><strong>App.vue 初始设置</strong> (template中的内容)</h5><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vue">&lt;template&gt;<br>  &lt;router-view&gt;&lt;&#x2F;router-view&gt;<br>&lt;&#x2F;template&gt;<br></code></pre></div></td></tr></table></figure>
+
+
+
+<h5 id="router-index-js-内容"><a href="#router-index-js-内容" class="headerlink" title="router/index.js 内容"></a><strong>router/index.js</strong> 内容</h5><figure class="highlight js"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs js"><span class="hljs-keyword">import</span> &#123;<br>  createRouter,<br>  createWebHistory <span class="hljs-comment">//这里改用的是createWebHistory 不是createWebHashHistory</span><br>&#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vue-router&#x27;</span><br><br><span class="hljs-keyword">const</span> routes = []<br><br><span class="hljs-keyword">const</span> router = createRouter(&#123;<br>  history: createWebHistory(),<br>  routes<br>&#125;)<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> router<br></code></pre></div></td></tr></table></figure>
+</blockquote>
+<h4 id="创建一个页面"><a href="#创建一个页面" class="headerlink" title="创建一个页面"></a>创建一个页面</h4><blockquote>
+<h5 id="在-App-vue-中的-lt-script-gt-lt-script-gt-，引入-bootstrap"><a href="#在-App-vue-中的-lt-script-gt-lt-script-gt-，引入-bootstrap" class="headerlink" title="在 App.vue 中的&lt;script&gt;&lt;/script&gt;，引入 bootstrap"></a>在 <strong>App.vue</strong> 中的<code>&lt;script&gt;&lt;/script&gt;</code>，引入 <strong>bootstrap</strong></h5><figure class="highlight js"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs js"><span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;bootstrap/dist/css/bootstrap.css&#x27;</span>;<br><span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;bootstrap/dist/js/bootstrap&#x27;</span>;<br></code></pre></div></td></tr></table></figure>
+
+<p>注意：如果引入 <code>import &#39;bootstrap/dist/js/bootstrap&#39;;</code> 发生报错，说明我们安装的bootstrap为5版本，需要在vue ui 中再安装一个插件  <code>Popper.js/core</code>    [参考资料](<a target="_blank" rel="noopener" href="https://towait.com/blog/module-not-found-error-cant-resolve-popperjs-core/#:~:text=Module">https://towait.com/blog/module-not-found-error-cant-resolve-popperjs-core/#:~:text=Module</a> not found%3A Error%3A Can ‘t resolve ‘,不是 Popper.js ，解决方法是安装 Popper.js%2Fcore npm install %40popperjs%2Fcore –save)</p>
+<img src="/2022/07/10/Vue3-%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/18.png" srcset="/img/loading.gif" lazyload style="zoom: 67%;">
+
+
+
+<h5 id="在-views-文件夹下，新建一个-HomeView-vue-文件"><a href="#在-views-文件夹下，新建一个-HomeView-vue-文件" class="headerlink" title="在 views 文件夹下，新建一个 HomeView.vue 文件"></a>在 <strong>views</strong> 文件夹下，新建一个 <strong>HomeView.vue</strong> 文件</h5><p><strong>.vue</strong> 文件初始样例</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vue">&lt;template&gt;<br>&lt;&#x2F;template&gt;<br><br>&lt;script&gt;<br>&lt;&#x2F;script&gt;<br><br>&lt;!-- scoped保证该样式只影响该vue界面 --&gt;<br>&lt;style scoped&gt;<br>&lt;&#x2F;style&gt;<br></code></pre></div></td></tr></table></figure>
+
+
+
+<h5 id="HomeView-vue"><a href="#HomeView-vue" class="headerlink" title="HomeView.vue"></a><strong>HomeView.vue</strong></h5><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vue">&lt;template&gt;<br>    &lt;div class&#x3D;&quot;container&quot;&gt;<br>        &lt;h1&gt;首页&lt;&#x2F;h1&gt;<br>    &lt;&#x2F;div&gt;<br>&lt;&#x2F;template&gt;<br><br>&lt;script&gt;<br><br>export default &#123;<br>  name: &#39;HomeView&#39;, &#x2F;&#x2F; 暴露出去后，其他组件调用时的名称<br>  components: &#123;&#125; &#x2F;&#x2F; import 一些组件之后，需要将这些名称放到components中<br>&#125;<br><br>&lt;&#x2F;script&gt;<br><br>&lt;!-- scoped保证该样式只影响该vue界面 --&gt;<br>&lt;style scoped&gt;<br>&lt;&#x2F;style&gt;<br></code></pre></div></td></tr></table></figure>
+
+
+
+<h5 id="在-App-vue-中引入-HomeView-组件"><a href="#在-App-vue-中引入-HomeView-组件" class="headerlink" title="在 App.vue 中引入 HomeView 组件"></a>在 <strong>App.vue</strong> 中引入 <strong>HomeView</strong> 组件</h5><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vue">&lt;template&gt;<br>  &lt;HomeView&gt;&lt;&#x2F;HomeView&gt;<br>  &lt;router-view&gt;&lt;&#x2F;router-view&gt;<br>&lt;&#x2F;template&gt;<br><br>&lt;script&gt;<br>import &#39;bootstrap&#x2F;dist&#x2F;css&#x2F;bootstrap.css&#39;;<br>import &#39;bootstrap&#x2F;dist&#x2F;js&#x2F;bootstrap&#39;<br>import HomeView from &#39;.&#x2F;views&#x2F;HomeView.vue&#39;;<br><br>export default &#123;<br>  name: &#39;App&#39;,<br>  components: &#123;<br>    HomeView,<br>  &#125;<br>&#125;<br>&lt;&#x2F;script&gt;<br></code></pre></div></td></tr></table></figure>
+
+
+
+<h5 id="页面展示"><a href="#页面展示" class="headerlink" title="页面展示"></a>页面展示</h5><img src="/2022/07/10/Vue3-%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/19.png" srcset="/img/loading.gif" lazyload style="zoom: 67%;">
+</blockquote>
+
             </div>
             <hr>
             <div>
