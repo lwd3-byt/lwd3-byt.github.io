@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>Vue3-基本配置</title>
+    <link href="/2022/07/10/Vue3-%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/"/>
+    <url>/2022/07/10/Vue3-%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/</url>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="Vue3-基本配置"><a href="#Vue3-基本配置" class="headerlink" title="Vue3-基本配置"></a>Vue3-基本配置</h2>]]></content>
+    
+    
+    <categories>
+      
+      <category>Vue</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>前端</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>React-Redux</title>
     <link href="/2022/07/10/React-Redux/"/>
     <url>/2022/07/10/React-Redux/</url>
