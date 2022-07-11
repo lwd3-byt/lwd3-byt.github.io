@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>Vue3-路由</title>
+    <link href="/2022/07/11/Vue3-%E8%B7%AF%E7%94%B1/"/>
+    <url>/2022/07/11/Vue3-%E8%B7%AF%E7%94%B1/</url>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="Vue3-路由"><a href="#Vue3-路由" class="headerlink" title="Vue3-路由"></a>Vue3-路由</h2><h4 id="设置一个NavBar导航栏"><a href="#设置一个NavBar导航栏" class="headerlink" title="设置一个NavBar导航栏"></a>设置一个NavBar导航栏</h4><blockquote><p>先设计几个页面</p><img src="/2022/07/11/Vue3-%E8%B7%AF%E7%94%B1/1.png"><p>要注意这几个页面export暴露出去的名字是驼峰命名的格式</p><p>根据这几个页面，设计一个导航栏</p><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vue">&lt;template&gt;<br>    &lt;nav class&#x3D;&quot;navbar navbar-expand-lg navbar-light bg-light&quot;&gt;<br>        &lt;div class&#x3D;&quot;container&quot;&gt;<br>            &lt;router-link class&#x3D;&quot;navbar-brand&quot; :to&#x3D;&quot;&#123;name: &#39;home&#39;&#125;&quot;&gt;NavBar&lt;&#x2F;router-link&gt;<br>            &lt;button class&#x3D;&quot;navbar-toggler&quot; type&#x3D;&quot;button&quot; data-bs-toggle&#x3D;&quot;collapse&quot; data-bs-target&#x3D;&quot;#navbarNavAltMarkup&quot; aria-controls&#x3D;&quot;navbarNavAltMarkup&quot; aria-expanded&#x3D;&quot;false&quot; aria-label&#x3D;&quot;Toggle navigation&quot;&gt;<br>                &lt;span class&#x3D;&quot;navbar-toggler-icon&quot;&gt;&lt;&#x2F;span&gt;<br>            &lt;&#x2F;button&gt;<br>            &lt;div class&#x3D;&quot;collapse navbar-collapse&quot; id&#x3D;&quot;navbarNavAltMarkup&quot;&gt;<br>                &lt;div class&#x3D;&quot;navbar-nav&quot;&gt;<br>                    &lt;router-link class&#x3D;&quot;nav-link&quot; :to&#x3D;&quot;&#123;name: &#39;home&#39;&#125;&quot;&gt;首页&lt;&#x2F;router-link&gt;<br>                    &lt;router-link class&#x3D;&quot;nav-link&quot; :to&#x3D;&quot;&#123;name: &#39;userlist&#39;&#125;&quot;&gt;好友列表&lt;&#x2F;router-link&gt;<br>                    &lt;router-link class&#x3D;&quot;nav-link&quot; :to&#x3D;&quot;&#123;name: &#39;myself&#39;&#125;&quot;&gt;个人主页&lt;&#x2F;router-link&gt;<br>                &lt;&#x2F;div&gt;<br>            &lt;&#x2F;div&gt;<br>        &lt;&#x2F;div&gt;<br>    &lt;&#x2F;nav&gt;<br>&lt;&#x2F;template&gt;<br><br>&lt;script&gt;<br>export default &#123;<br>    name: &quot;NavBar&quot;,<br>&#125;<br>&lt;&#x2F;script&gt;<br><br>&lt;style scoped&gt;<br>&lt;&#x2F;style&gt;<br></code></pre></div></td></tr></table></figure><p>上面的代码，需要注意 <code>router-link</code></p><p><code>router-link</code> 的 <strong>to</strong> 属性 可以传一个字典</p><blockquote><ul><li>其中 <strong>name</strong> 的命名需要和 <strong>router/index.js</strong> 中的 <strong>name</strong> 相同</li><li>还有一个 <strong>params</strong> 可以传一些参数</li></ul></blockquote><p><strong>router/index.js</strong> 中内容</p><figure class="highlight js"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs js"><span class="hljs-keyword">import</span> HomeView <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;../views/HomeView.vue&#x27;</span><br><span class="hljs-keyword">import</span> UserList <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;../views/UserlistView.vue&#x27;</span><br><span class="hljs-keyword">import</span> MySelf <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;../views/MyselfView.vue&#x27;</span><br><br><span class="hljs-keyword">const</span> routes = [&#123;<br>  path: <span class="hljs-string">&#x27;/&#x27;</span>,<br>  name: <span class="hljs-string">&#x27;home&#x27;</span>,<br>  component: HomeView,<br>&#125;, &#123;<br>  path: <span class="hljs-string">&#x27;/userlist/&#x27;</span>,<br>  name: <span class="hljs-string">&#x27;userlist&#x27;</span>,<br>  component: UserList,<br>&#125;, &#123;<br>  path: <span class="hljs-string">&#x27;/myself/&#x27;</span>,<br>  name: <span class="hljs-string">&#x27;myself&#x27;</span>,<br>  component: MySelf,<br>&#125;]<br></code></pre></div></td></tr></table></figure></blockquote>]]></content>
+    
+    
+    <categories>
+      
+      <category>Vue</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>前端</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Vue3-基本配置</title>
     <link href="/2022/07/10/Vue3-%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/"/>
     <url>/2022/07/10/Vue3-%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/</url>
