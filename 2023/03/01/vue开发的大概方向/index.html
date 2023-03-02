@@ -184,7 +184,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      553 字
+      695 字
     </span>
   
 
@@ -194,7 +194,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      6
+      7
        分钟
     </span>
   
@@ -235,8 +235,11 @@
 <p>先想需要的模块有几个，就现在views文件夹中创建多少个文件夹，同时每个模块都有一个小主页，那么根据命名，给每个文件夹都先来一个index小主页面。（记得将页面export default出来）</p>
 <p>然后是在components文件夹中创建一个NavBar组件(实际还是vue文件)，并将其添加到App.vue中</p>
 <p>接着，在router文件夹中的index.js文件中，引入暴露出来的页面，将在routers[]中，将路由path，与component连接，并为这个路由起一个name。</p>
-<p>接着把导航栏中的<a>链接，改为router-link，而router-link中的:to{name: }就是routers[]的对应路由的名称。</a></p>
+<p>最后把导航栏中的<a>链接，改为router-link，而router-link中的:to{name: }就是routers[]的对应路由的名称。</a></p>
 </blockquote>
+<p>经过上述流程，就可以实现基本的页面框架了。</p>
+<p>可以将每个页面都放到一个card(自适应)里，而这个card是公用的，所以我们可以给它取个名字叫：ContentBase.vue，并将其放到components文件夹中，这样我们在每个页面都可以先使用到这个card组件，然后再在card里面写页面内容。</p>
+<p>这样做的好处有很多，一个是公用组件，另一个是可以通过操纵ContentBase.vue实现整个页面的移动和布局</p>
 
             </div>
             <hr>
